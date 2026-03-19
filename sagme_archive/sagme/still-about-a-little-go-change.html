@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Still about a little Go change</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Still about a little Go change</h2>
+  <b>Date:</b> 2005-01-28 09:31 | <b>Tags:</b> go
+  <hr>
+
+[<a href="http://sagme.blogspot.com/2004/11/little-go-change.html">check previous</a>] What should happen around the edges? Should pushes be allowed? The rule can be restated as: "If an isolated piece is in atari, the other player may push it into that empty cell."
+<br />
+<br />This means that the next move would be possible:
+<br /><code>
+<br />&nbsp;&nbsp;. . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . .
+<br />&nbsp;&nbsp;. x o .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . x o .
+<br />&nbsp;&nbsp;x . x o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x x o <
+<br />&nbsp;&nbsp;[edge]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[edge]
+<br /></code>
+<br />This rule still has the effect of eventually create new eyes and more KO problems. One way to solve that is to state the rule like this: "If an isolated piece is in atari, the other player may push it into that empty cell, placing a new stone on that cell". 
+<br />
+<br />The previous move would result on the next position:
+<br /><code>
+<br />&nbsp;&nbsp;. . . . .
+<br />&nbsp;&nbsp;. x o .
+<br />&nbsp;&nbsp;x x o o
+<br />&nbsp;&nbsp;[edge]
+<br /></code>
+
+</body>
+</html>

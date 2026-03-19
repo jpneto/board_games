@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>SAUCE</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>SAUCE</h2>
+  <b>Date:</b> 2013-06-19 17:30 | <b>Tags:</b> new games
+  <hr>
+
+<p style="text-align: justify;">Played in a 5 hexhex board.&nbsp;</p><p style="text-align: justify;">For the first turn, first player drops one stone, second player drops two. After that, a turn is to place two stones, or three if the opponent's biggest group is bigger than the player's (recursively). Passes are always legal instead of placements.<br />
+<br />
+When the board is full, the recursively-largest connected group wins.<br /></p><p>
+<br />
+<code>Sample game:</code><br />
+<code><br /></code>
+<code>&nbsp; &nbsp; &nbsp; ___OOO________XXX___<br />
+&nbsp; 1. &nbsp;.. &nbsp;i5 &nbsp; &nbsp; &nbsp;k3 &nbsp;f4<br />
+&nbsp; 2. &nbsp;o3 l4 f6 &nbsp; &nbsp;h2 h6 k5<br />
+&nbsp; 3. &nbsp;i3 o5 k7 &nbsp; &nbsp;h4 j4 g5<br />
+&nbsp; 4. &nbsp;g7 i7 n6 &nbsp; &nbsp;d2 &nbsp;m7<br />
+&nbsp; 5. &nbsp;n4 e5 l6 &nbsp; &nbsp;c5 l2 d2<br />
+&nbsp; 6. &nbsp;b6 &nbsp;d6 &nbsp; &nbsp; &nbsp;n2 a5 l6<br />
+&nbsp; 7. &nbsp;j6 &nbsp;j8 &nbsp; &nbsp; &nbsp;o7 f8 k9<br />
+&nbsp; 8. &nbsp;h8 &nbsp;g9 &nbsp; &nbsp; &nbsp;b4 m3 m5<br />
+&nbsp; 9. &nbsp;e7 &nbsp;d8 &nbsp; &nbsp; &nbsp;i9 p6 q5<br />
+&nbsp;10. &nbsp;j2 &nbsp;g3 &nbsp; &nbsp; &nbsp;f2 g1 i1<br />
+&nbsp;11. &nbsp;k1 &nbsp;e3 &nbsp; &nbsp; &nbsp;c3 m1 e1<br />
+&nbsp;12. &nbsp;c7 e9 p4 &nbsp; &nbsp;n8 m9<br />
+<br />Final Position:</code><br />
+<code><br /></code>
+<code>| &nbsp; &nbsp;abcdefghijklmnopq &nbsp; &nbsp;<br />| &nbsp; &nbsp; &nbsp; &nbsp;x x x o x &nbsp; &nbsp; &nbsp; &nbsp; 1<br />| &nbsp; &nbsp; &nbsp; x x x o x x &nbsp; &nbsp; &nbsp; &nbsp;2<br />| &nbsp; &nbsp; &nbsp;x o o o x x o &nbsp; &nbsp; &nbsp; 3<br />| &nbsp; &nbsp; x x x x x o o o &nbsp; &nbsp; &nbsp;4<br />| &nbsp; &nbsp;x x o x o x x o x &nbsp; &nbsp; 5<br />| &nbsp; &nbsp; o o o x o o o x &nbsp; &nbsp; &nbsp;6<br />| &nbsp; &nbsp; &nbsp;o o o o o x x &nbsp; &nbsp; &nbsp; 7<br />| &nbsp; &nbsp; &nbsp; o x o o x x &nbsp; &nbsp; &nbsp; &nbsp;8<br />| &nbsp; &nbsp; &nbsp; &nbsp;o o x x x &nbsp; &nbsp; &nbsp; &nbsp; 9<br />| &nbsp; &nbsp;abcdefghijklmnopq<br />&nbsp;</code><br />
+<code>Groups sizes:<br />
+Os: size 23, 5<br />
+Xs: size 23, 9 &nbsp;X wins</code><br />
+<br />
+Notice the recursive aspect of the goal. This is a quite interesting idea to apply in games where it's not difficult to draw (and we like to avoid draws, of course).</p>
+
+</body>
+</html>

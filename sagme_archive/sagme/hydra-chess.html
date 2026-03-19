@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>HYDRA CHESS</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>HYDRA CHESS</h2>
+  <b>Date:</b> 2006-07-26 08:56 | <b>Tags:</b> chess
+  <hr>
+
+Rules:<br /><br />&nbsp;&nbsp;1. Basic chess rules apply, except:<br />&nbsp;&nbsp;2. When a piece makes a capture, it reduces rank and buds off<br />&nbsp;&nbsp;&nbsp;&nbsp; a piece one rank lower, leaving this behind on the exit square. <br />&nbsp;&nbsp;&nbsp;&nbsp; Ranks: KQRBNP-.<br /><br />------------<br /><br />The Hydra game is a one-person game.<br /><br />You start with a rooted tree, and at any move, you may remove one<br />leaf, and then duplicate (later triplicate, quadruplicate etc)<br />the whole remaining subtree it leaves, right down to the root.<br />The "n" in the n-plicate goes up one on every move, starting at 2.<br /><code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * *&nbsp;&nbsp; * *<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \ /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \|&nbsp;&nbsp; |/<br />So e.g. if we&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp; *&nbsp;&nbsp; *&nbsp;&nbsp;...it goes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp; *&nbsp;&nbsp; *<br />delete the left&nbsp;&nbsp;&nbsp;&nbsp;\ /&nbsp;&nbsp; /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to this one,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \&nbsp;&nbsp;|&nbsp;&nbsp;/<br />leaf from this&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; when n=2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * * *<br />tree...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \|/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; R</code><br /><br />The number of nodes increases dramatically every time, but... the theorem is, no matter what you start with, and how you choose your leaf cuttings, IT WILL ALWAYS REDUCE to the empty tree, eventually !!<br /><br />In fact, you don't even have to restrict yourself to increasing the n by one every time, you can up it in squares or powers of two or anything you like!<br /><br />And it's one of those things that can be easily stated in basic number theory, (PA), but not proved there.&nbsp;&nbsp;To prove it requires knowing about infinite ordinal numbers up to epsilon_0, if that means anything to you, which is the first ordinal that PA "can't handle".&nbsp;&nbsp;i.e. can't prove that it is an ordinal, i.e. that<br />the above process must halt, (as it executes a decreasing series of ordinals, which therefore must always terminate).<br /><br />You can see how the newly proposed budding chess emulates this slightly; there is an increasing number of pieces, but the total metric (in an appropriate sense) is always decreasing... i.e. the "top value".
+
+</body>
+</html>

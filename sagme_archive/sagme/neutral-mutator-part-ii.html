@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Neutral Mutator (part II)</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Neutral Mutator (part II)</h2>
+  <b>Date:</b> 2005-06-27 15:58 | <b>Tags:</b> mutators
+  <hr>
+
+In these neu-games, the instances of two game plans being executed quite independently of each other, is much more common than in regular games. The neutral structures serve to undermine enemy positions and to create optional paths to the game's goal. It is a very flexible tool.<br /><br />I realized that this mutator could be used in many more games. But before continuing, as Bill Taylor noted, the rules would not be totally specified unless we say what happens when the board is almost full:<br /><br />1) When there is 1 space and no neutrals left: player to move fills the space;<br />2) when there is 1 neutral and no spaces: mover converts the neutral to his own;<br />3) when 1 of each: mover fills the space, then opponent converts neutral.<br /><br />As a default option, these end-game rules always apply.<br /><br />A second experiment was Gomoku. We were surprised to see what a remarkable game was discovered. The complexity and balance of Neumoku seems extraordinary.<br /><br />NEUMOKU: On a unlimited square board, each player may:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Drop a friendly stone plus a neutral stone<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Flip two neutral stones into friendly stones and then flip another friendly stone into a neutral stone<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The goal is like Gomoku.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIE RULE: After the third move, the second player may swap sides.<br /><br />A sample game:<br /><br /><code>&nbsp;&nbsp; --x----?-----o----?--<br /> 1.&nbsp;&nbsp;n3&nbsp;&nbsp;m5&nbsp;&nbsp;&nbsp;&nbsp; o2&nbsp;&nbsp; n4<br /> 2.&nbsp;&nbsp;l6&nbsp;&nbsp;q2&nbsp;&nbsp;&nbsp;&nbsp; o3&nbsp;&nbsp; p2<br /> 3.&nbsp;&nbsp;o4&nbsp;&nbsp;p5&nbsp;&nbsp;&nbsp;&nbsp; m2&nbsp;&nbsp; q1<br /> 4.&nbsp;&nbsp;n2&nbsp;&nbsp;n6&nbsp;&nbsp;&nbsp;&nbsp;n4p2&nbsp;&nbsp;o2<br /> 5. q1o2 n2&nbsp;&nbsp;&nbsp;&nbsp; p4&nbsp;&nbsp; q5<br /> 6. n2q5 n3&nbsp;&nbsp;&nbsp;&nbsp; p3&nbsp;&nbsp; m3<br /> 7. n3p5 q5&nbsp;&nbsp;&nbsp;&nbsp; p1&nbsp;&nbsp; q3<br /> 8.&nbsp;&nbsp;p0&nbsp;&nbsp;q6&nbsp;&nbsp;&nbsp;&nbsp;q5q6&nbsp;&nbsp;p3<br /> 9.&nbsp;&nbsp;l4&nbsp;&nbsp;k5&nbsp;&nbsp;&nbsp;&nbsp;m3q3&nbsp;&nbsp;p2<br />10. p2q2 q1&nbsp;&nbsp;&nbsp;&nbsp; r2&nbsp;&nbsp; r3<br /></code><br />Actual Board:<br /><code><br />j k l m n o p q r s<br />. . . . . . . . . .&nbsp;&nbsp;-1<br />. . . . . . x . . .&nbsp;&nbsp; 0<br />. . . . . . o ? . .&nbsp;&nbsp; 1<br />. . . o x x x x o .&nbsp;&nbsp; 2<br />. . . o x o ? o ? .&nbsp;&nbsp; 3<br />. . x . o x o . . .&nbsp;&nbsp; 4<br />. ? . ? . . x o . .&nbsp;&nbsp; 5<br />. . x . ? . . o . .&nbsp;&nbsp; 6<br />. . . . . . . . . .&nbsp;&nbsp; 7<br /></code><br />Here, 'o' has a winning sequence:<br /><code><br />&nbsp;&nbsp; --x---?-----o---?--<br />11.&nbsp;&nbsp;o5&nbsp;&nbsp;l5&nbsp;&nbsp;&nbsp;&nbsp;r7&nbsp;&nbsp;s1<br />12.&nbsp;&nbsp;s7&nbsp;&nbsp;l3&nbsp;&nbsp;&nbsp;&nbsp;q4&nbsp;&nbsp;t0<br /><br />j k l m n o p q r s t u<br />. . . . . . . . . . . . -1<br />. . . . . . x . . . ? .&nbsp;&nbsp;0<br />. . . . . . o ? . ? . .&nbsp;&nbsp;1<br />. . ? o x x x x o . . .&nbsp;&nbsp;2<br />. . . o x o ? o ? . . .&nbsp;&nbsp;3<br />. . x . o x o o . . . .&nbsp;&nbsp;4<br />. ? ? ? . x x o . . . .&nbsp;&nbsp;5<br />. . x . ? . . o o . . .&nbsp;&nbsp;6<br />. . . . . . . . . x . .&nbsp;&nbsp;7<br />. . . . . . . . . . . .&nbsp;&nbsp;8<br /></code><br />Next turn, 'o' wins at column 'q' or the diagonal from p4 to t0. [cont.]
+
+</body>
+</html>

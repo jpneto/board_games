@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Neutral Mutator (part III)</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Neutral Mutator (part III)</h2>
+  <b>Date:</b> 2005-06-30 10:39 | <b>Tags:</b> mutators
+  <hr>
+
+Another game that fits nicely with this mutator is Y. The complexity of this game on even quite small boards is amazing:<br /><code><br />&nbsp;&nbsp;&nbsp;&nbsp; abcdefghi&nbsp;&nbsp;&nbsp;&nbsp;--x---?----o---?--<br /> 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e1&nbsp;&nbsp;f4&nbsp;&nbsp; e4&nbsp;&nbsp;h2<br /> 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c1&nbsp;&nbsp;c3&nbsp;&nbsp; f2&nbsp;&nbsp;e5<br /> 3&nbsp;&nbsp;&nbsp;&nbsp; x o ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g1&nbsp;&nbsp;d4&nbsp;&nbsp; a1&nbsp;&nbsp;i1<br /> 2&nbsp;&nbsp;&nbsp;&nbsp;x . o o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b2&nbsp;&nbsp;g3&nbsp;&nbsp;h2i1 a1<br /> 1&nbsp;&nbsp; ? x x ? o&nbsp;&nbsp;&nbsp;&nbsp; c3d4 g1&nbsp;&nbsp;resigns<br /></code><br />'o' must swap (as there is only one empty cell), and though momentarily creating a winning path, must immediately destroy it by exchanging one of his vital stones. But in doing that, 'o' provides a winning path for 'x'.<br /><br />Neu-Reversi can be played in two ways.<br /><br />(a) NeuVersi: a neutral stone can be dropped anywhere on the board;<br />(b) AdNeuVersi: it must be adjacent to some stone(s) of some player(s).<br /><br />In both games, the playing of a genuine stone must follow reversi rules, and neutral stones can be turned over to the player's colour as if they were opponent stones; and if two neutrals are flipped, both must be legal reversi moves in the order played.&nbsp;&nbsp;As always, if a player cannot make a legal move he is obliged to pass, and if both are thus obliged to pass the game ends and the count is done.&nbsp;&nbsp;Note, there is no need for the extra game-end placement default-option rules in these games.<br /><br />The discoverers have tried both versions, and found them both to have their own intriguing characters, which are noticeably (though not overwhelmingly) different from the parent game.&nbsp;&nbsp;In general, as with all Neu-games, there tend to appear more strategic plans and tactical resources than with parent games, for the same-sized boards.<br /><br />Here is an example for NeuVersi :<br /><code><br />&nbsp;&nbsp;&nbsp;&nbsp;--x---?-----o---?--<br /> 1.&nbsp;&nbsp;e3&nbsp;&nbsp;g7&nbsp;&nbsp;&nbsp;&nbsp;f3&nbsp;&nbsp;c4<br /> 2.&nbsp;&nbsp;f4&nbsp;&nbsp;f6&nbsp;&nbsp;&nbsp;&nbsp;b3&nbsp;&nbsp;h8<br /> 3.&nbsp;&nbsp;c5&nbsp;&nbsp;b4&nbsp;&nbsp;&nbsp;&nbsp;a4&nbsp;&nbsp;g4<br /> 4.&nbsp;&nbsp;a2&nbsp;&nbsp;h4<br /><br /> . . . . . . . .&nbsp;&nbsp;1<br /> x . . . . . . .&nbsp;&nbsp;2<br /> . x . . x o . .&nbsp;&nbsp;3<br /> o o x x x x ? ?&nbsp;&nbsp;4<br /> . . x x x . . .&nbsp;&nbsp;5<br /> . . . . . ? . .&nbsp;&nbsp;6<br /> . . . . . . ? .&nbsp;&nbsp;7<br /> . . . . . . . ?&nbsp;&nbsp;8<br /> a b c d e f g h<br /></code><br />'x' tries to get the h8 corner in the next turn. However, 'o' moves 4... h4 a8, with the following result:<br /><code><br /> . . . . . . . .&nbsp;&nbsp;1<br /> x . . . . . . .&nbsp;&nbsp;2<br /> . x . . x o . .&nbsp;&nbsp;3<br /> o o o o o o o o&nbsp;&nbsp;4<br /> . . x x x . . .&nbsp;&nbsp;5<br /> . . . . . ? . .&nbsp;&nbsp;6<br /> . . . . . . ? .&nbsp;&nbsp;7<br /> ? . . . . . . ?&nbsp;&nbsp;8<br /> a b c d e f g h<br /></code><br />if 'x' swaps h8, there will be only one neutral left (a8) which provides no captures. So, the move is illegal and 'x' cannot take the corner. [cont.]
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Seo's unknown game</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Seo's unknown game</h2>
+  <b>Date:</b> 2007-03-23 21:33 | <b>Tags:</b> new games
+  <hr>
+
+[Seo Sanghyeon mathmaniac@hanmail.net] This game (name and author unknown) is played on square grid board of odd size. But don't choose smaller than 3x3. It's trivial. 5x5 with two players is interesting enough, but 7x7 is more strategic, I think. <br /><br />EQUIPMENT: I strongly recommend to play by paper and pencil. It's hard to play with board and stones. Since there is no capture, no need for eraser. <br /><br />INITIAL POSITION: Each player chooses start position, and drop his stone there.<br /><br />DROP: On each turn, each player drops a stone on an empty cell adjacent, orthogonally or diagonally, to his last dropped stone. And board wraps, i.e. first row is adjacent to last row, etc. And draw (this is why paper and pencil is recommended) a link from his last dropped stone to his newly dropped stone. When playing diagonally adjacent cell, this link should not be crossed. <br /><br /><code>. . . . <br />. o 1 . <br />. x , . <br />. . . . </code><br /><br />If 'x' plays '1', a link from 'x' to '1' is drawn, and since it cannot be crossed, 'o' cannot play ','. <br /><br /><code>..  o2 o3 o4 <br />..  o1 ,,  o5 <br />..  x.  o7 o6 <br />..  ..  ..  .. </code><br /><br />On the other hand, if 'o1'-'o7' is played in that order, there is no link from 'o1' to 'o7', so 'x' can play ','. So that's why playing with board and stones is ambiguous. <br /><br /><span style="font-weight:bold;">A variant</span> <br /><br /><code>..  ..  ..  .. <br />..  x1 x3 .. <br />..  ,,  x2 .. <br />..  ..  ..  .. </code><br /><br />According to the rule described above, now 'x' cannot play ',', because 'x1' to 'x2' link will be crossed. But there's a variant that allows crossing of his own link. And it seems this leads to more interesting game on 7x7.<br /><br />EXAMPLE GAME: <br /><br />'x0', 'o0' is initial position, i.e. diagonally opposite corner. Since board wraps, there's no difference between corner and center. But wrapping moves are harder to read. 'x' plays first. <br /><br /><code>x0 ..  x5 o5 o6 <br />o7 ..  x4 x6 x7 <br />x8 ..  x3 ..  ** <br />..  x2 o2 o1 ..  <br />..  x1 o3 o4 o0 </code><br /><br />(o8: resign) <br /><br />COMMENT: <br /><br />x2-x3 prevents white to move toward upper left corner. x5 is of same line, preventing o4-x5 wrap move. And notice that, after o7, o cannot play marked ** cell, since it will cross x7-x8 link. <br /><br /><code>. . / . . . . <br />\ x . x o o . <br />\ o . x x x \ <br />. x . x . . \ <br />. . x o o . . <br />. . x o o o . <br />. / . . | . .</code> <br /><br />If you draw board this way, It's not that hard to see. (It can be done on TwixT board, too.) So, white has at most three cells to play, but black has five. <br /><br /><code>. . / . . . . <br />\ x 5 x o o . <br />\ o 3 x x x \ <br />. x 1 x . . \ <br />\ 2 x o o 6 . <br />. 4 x o o o \ <br />. / . . | . . </code><br /><br />Also notice that <br /><br /><code>x0 ** x5 o5 o6 <br />o7 :: x4 x6 x7 <br />x8 ..  x3 ..  ..  <br />..  x2 o2 o1 ..  <br />## x1 o3 o4 o0</code><br /><br />o cannot play o7-**-## line, since it crosses x0-x1 link. Therefore <br />:: as a reply to ** is a mating move.
+
+</body>
+</html>

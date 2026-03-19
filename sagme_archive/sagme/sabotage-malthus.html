@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>SABOTAGE MALTHUS </title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>SABOTAGE MALTHUS </h2>
+  <b>Date:</b> 2013-06-06 13:11 | <b>Tags:</b> new games
+  <hr>
+
+<br />
+<tt>Initial setup:</tt><br />
+<tt>
+</tt>
+<br /><tt>&nbsp; abcdefghijklmnopqrstuvwxy&nbsp;&nbsp;&nbsp; </tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . x .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . o . . . x . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 5
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp; . . . . . . . . . . . .&nbsp;&nbsp;&nbsp; 6
+</tt><tt><br />
+</tt><tt>&nbsp; . x x . . . . . . . o o .&nbsp;&nbsp; 7
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp; . . . . . . . . . . . .&nbsp;&nbsp;&nbsp; 8
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 9
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 10
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . o . . . x . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . o . . . . x .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13
+</tt><tt><br />
+</tt><tt>&nbsp; abcdefghijklmnopqrstuvwxy </tt><br />
+<tt><br />
+</tt><tt><tt>The mover places stones of either colour on empty spaces;
+</tt><tt>
+</tt><tt>as many (unrestricted) per turn as he has groups size 2 or more.
+</tt><tt><br />
+</tt>
+<tt><br />
+</tt>The game ends when the board is full or both consecutively pass;
+</tt><tt>
+</tt><tt>the player with the largest connected group (recursively), wins.
+</tt><tt></tt><br />
+<tt></tt><br />
+<tt>Recursive scoring means that if both largest groups are equal, then it's the 2nd largest groups that decide the match (and so on, if they are also equal...)<br />
+</tt>
+<tt><br />
+</tt><tt>Game Sample:</tt><br />
+<tt><br />
+</tt><tt>&nbsp; abcdefghijklmnopqrstuvwxy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x x . . o x x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.&nbsp; j4&nbsp; p12&nbsp;
+</tt><tt>(</tt><tt><tt>O started)</tt></tt><br />
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . o o o x x x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.&nbsp; f12 g13 q13
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp; . . o x x x x o o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.&nbsp; o11 c9&nbsp; e9
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp; . . o o x o x o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.&nbsp; g1&nbsp; i1&nbsp; y7&nbsp; x8
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp; . . o x x x o x o x x&nbsp;&nbsp;&nbsp;&nbsp; 5.&nbsp; r4 s3 d6 t10 u11
+</tt><tt><br />
+</tt><tt>&nbsp; o o o o x x o o x o . o&nbsp;&nbsp;&nbsp; 6.&nbsp; m7 o7 l6 l8&nbsp; k5 k9
+</tt><tt><br />&nbsp;</tt><tt>. x x . o x x x o x o o x&nbsp;&nbsp; 7.&nbsp; n5 o5 f6 i7 q7 h8 p8
+</tt><tt><br />
+</tt><tt>&nbsp; . . o o x x x o o x o x&nbsp;&nbsp;&nbsp; 8.&nbsp; t2 m3 o3 l4 g11 h10 j10
+</tt><tt><br />&nbsp;&nbsp;</tt><tt> o o x x x o o . o o .&nbsp;&nbsp;&nbsp;&nbsp; 9.&nbsp; lm2 s5 px6 m9 lpq10 k11 o13
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp; x x x x o x o o o .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10. i5 J2 H6&nbsp; F8 O9
+</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp; x x o o x o x . o&nbsp; &nbsp;&nbsp; &nbsp; 11. o1 h4 g5 i14 u3
+</tt><tt><br />
+</tt><tt>&nbsp; &nbsp; &nbsp; x o . o . o x X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12. (more moves not recorded)</tt><tt><br />
+</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x o . o o x .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13. </tt><tt><br />
+</tt><tt>&nbsp; abcdefghijklmnopqrstuvwxyz#:-
+</tt><tt><br />
+</tt>
+<tt><br />
+</tt><tt>O: 2 groups&nbsp;&nbsp;&nbsp;&nbsp; largest is 34
+</tt><tt><br />
+</tt><tt>X: 7 groups&nbsp;&nbsp;&nbsp;&nbsp; largest is 37
+</tt><tt></tt><br />
+<tt><br />
+</tt><br />
+<tt>O resigned in this position, since he can only play two stones per turn (against 7 stones from X), but he would have needed three stones so that his largest group would also consist of 37 stones. If that happenend, O would win because he has the 2nd largest group.<br />
+</tt>
+
+</body>
+</html>

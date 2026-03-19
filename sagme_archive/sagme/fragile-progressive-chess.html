@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>FRAGILE PROGRESSIVE CHESS</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>FRAGILE PROGRESSIVE CHESS</h2>
+  <b>Date:</b> 2007-02-12 10:00 | <b>Tags:</b> chess
+  <hr>
+
+Basic progressive chess, with the following addition.<br />After every capture, a piece immediately reduces one rank in strength<br />before the series continues.  Order  Q R B N P -. Kings don't change.<br />(the order is: capture;reduce;promote;check;endmove)<br /><br />Sample game:<br /><code><br />1. e4<br />2. d5 e:d<br />3. Bc4:d7(N):d8P>Q+<br />4. K:d8 Bf4:d1(N):b2P<br />5. B:b2 Nc5b6:a8>Q:b8+<br />6. Kd7 e5 Ba3b2:a1>N b5<br />7. Nf3h4h5 Nc3d5:c7>Pc8>Q++<br /><br />Final Position:<br /><br />. R Q . . . n r<br />p . . k . . p p<br />. . . . . . . .<br />. p . . p N . .<br />. . . . . . . .<br />. . . . . . . .<br />O . O O . O O O<br />n . . . K . . R<br /></code>
+
+</body>
+</html>

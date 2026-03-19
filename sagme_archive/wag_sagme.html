@@ -1,0 +1,4270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabsact Sagme's Blog</title>
+  <style>
+    body {
+      font-family: Courier New, sans-serif;
+      padding: 20px;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #bbb;
+      padding: 6px 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 12px;
+    }
+    th {
+      /* background-color: #f4f4f4; */
+      cursor: pointer;
+      font-size: 14px;
+    }
+    th.sorted-asc::after {
+      content: " ↑";
+    }
+    th.sorted-desc::after {
+      content: " ↓";
+    }    
+    input[type="text"] {
+      font-family: Courier New;
+      width: 380px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    input[class="bgg"] {
+      width: 28px;
+      padding: 5px 6px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    input[class="google"] {
+      width: 112px;
+      padding: 5px 6px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    a {
+      color: #000000; /* #007bff; */
+      text-decoration: none;
+      margin-right: 8px;
+      display: inline-block;
+      font-size: 12px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    input[type="text"],
+    input[type="text"]:focus   
+    {
+         background: transparent;
+         /* border: none; */
+         outline-width: 0;
+    }    
+    .half-width {
+      width: 70%;
+      margin: 0 auto; /* optional: centers the div horizontally */
+      background-color: #f4f4f4; /* optional: just for visibility */
+      padding: 1em;
+    }    
+  </style>
+</head>
+
+<body background = "back-wood3.jpg" onload="sortTable(0)"> 
+
+<h1>Trabsact Sagme's Archive</h1>
+
+  <details>
+     <summary>About this page</summary>
+     <div class="half-width">      
+     <p>This list is an archive of the posts published at Sagme's blog</p>
+  </details>
+ 
+  <input type="text" id="searchInput" onkeyup="filterTable()"
+         placeholder="Search (!word for exclusion, >year <year for ranges)" autofocus>
+  <br>
+  <span id="list-length"></span> 
+  
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Date</th>
+        <th onclick="sortTable(1)">Tags</th>
+        <th onclick="sortTable(2)">Posts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    const data = [
+      {
+        date: "2032-01-01 22:12",
+        tags: "art and history",
+        url: "sagme/all-good-things-must-come-to-an-end.html",
+        linkName: "All good things must come to an end"
+      },
+      {
+        date: "2030-12-27 11:49",
+        tags: "stack pieces, flip pieces",
+        url: "sagme/explosion.html",
+        linkName: "Explosion"
+      },
+      {
+        date: "2030-12-20 10:17",
+        tags: "checkers, stack pieces",
+        url: "sagme/die-neue-dame.html",
+        linkName: "Die Neue Dame"
+      },
+      {
+        date: "2030-12-13 08:14",
+        tags: "old games",
+        url: "sagme/the-great-wall.html",
+        linkName: "The Great Wall"
+      },
+      {
+        date: "2030-12-06 21:14",
+        tags: "old games",
+        url: "sagme/samurai.html",
+        linkName: "Samurai"
+      },
+      {
+        date: "2030-11-29 17:17",
+        tags: "old games",
+        url: "sagme/trespass.html",
+        linkName: "Trespass"
+      },
+      {
+        date: "2030-11-22 16:58",
+        tags: "old games, rotating pieces",
+        url: "sagme/deflection.html",
+        linkName: "Deflection"
+      },
+      {
+        date: "2030-11-15 12:44",
+        tags: "old games",
+        url: "sagme/chess-kers.html",
+        linkName: "Chess-kers"
+      },
+      {
+        date: "2030-11-08 11:06",
+        tags: "old games, checkers, chess",
+        url: "sagme/dymonds.html",
+        linkName: "Dymonds"
+      },
+      {
+        date: "2030-11-01 10:19",
+        tags: "old games",
+        url: "sagme/freeze.html",
+        linkName: "Freeze"
+      },
+      {
+        date: "2030-10-25 19:46",
+        tags: "old games",
+        url: "sagme/box-clever.html",
+        linkName: "Box Clever"
+      },
+      {
+        date: "2030-10-18 21:05",
+        tags: "traditional games",
+        url: "sagme/jiu-the-tibetan-fang-qi.html",
+        linkName: "Jiu, The Tibetan Fang Qi"
+      },
+      {
+        date: "2030-10-11 13:16",
+        tags: "older games, checkers",
+        url: "sagme/the-new-game-of-war.html",
+        linkName: "The New Game of War"
+      },
+      {
+        date: "2030-10-04 00:58",
+        tags: "older games, checkers",
+        url: "sagme/lo-hu.html",
+        linkName: "Lo-Hu"
+      },
+      {
+        date: "2030-09-27 09:42",
+        tags: "older games",
+        url: "sagme/porsta.html",
+        linkName: "Porsta"
+      },
+      {
+        date: "2030-09-20 08:28",
+        tags: "older games, checkers, incomplete rules",
+        url: "sagme/the-spider-and-the-flies.html",
+        linkName: "The Spider and The Flies "
+      },
+      {
+        date: "2030-09-13 08:00",
+        tags: "older games",
+        url: "sagme/kreuz-und-quer.html",
+        linkName: "Kreuz und Quer"
+      },
+      {
+        date: "2030-09-06 22:15",
+        tags: "dice, new games",
+        url: "sagme/op-position.html",
+        linkName: "OP Position"
+      },
+      {
+        date: "2030-08-30 22:04",
+        tags: "new games",
+        url: "sagme/king.html",
+        linkName: "King"
+      },
+      {
+        date: "2030-08-23 11:56",
+        tags: "older games",
+        url: "sagme/toi-toi-die-grabenhopser.html",
+        linkName: "Toi-Toi, die Grabenhopser"
+      },
+      {
+        date: "2030-08-16 15:54",
+        tags: "old games",
+        url: "sagme/fortress.html",
+        linkName: "Fortress"
+      },
+      {
+        date: "2030-08-09 15:03",
+        tags: "older games",
+        url: "sagme/ho-mo.html",
+        linkName: "Ho-Mo"
+      },
+      {
+        date: "2030-08-02 14:48",
+        tags: "new games",
+        url: "sagme/exposure.html",
+        linkName: "Exposure"
+      },
+      {
+        date: "2030-07-26 07:51",
+        tags: "older games, checkers",
+        url: "sagme/panzerschlacht.html",
+        linkName: "Panzerschlacht"
+      },
+      {
+        date: "2030-07-19 07:39",
+        tags: "older games",
+        url: "sagme/g-h-q.html",
+        linkName: "G.H.Q."
+      },
+      {
+        date: "2030-07-12 07:22",
+        tags: "older games",
+        url: "sagme/king-s-men.html",
+        linkName: "King's Men"
+      },
+      {
+        date: "2030-07-05 06:52",
+        tags: "older games",
+        url: "sagme/cetro.html",
+        linkName: "Cetro"
+      },
+      {
+        date: "2030-06-28 14:21",
+        tags: "older games, checkers",
+        url: "sagme/checkorete-and-super-chex.html",
+        linkName: "Checkorete and Super-Chex"
+      },
+      {
+        date: "2030-06-21 08:35",
+        tags: "new games",
+        url: "sagme/terrace.html",
+        linkName: "Terrace"
+      },
+      {
+        date: "2030-06-14 08:04",
+        tags: "new games, stack pieces, tile games",
+        url: "sagme/crescendo.html",
+        linkName: "Crescendo"
+      },
+      {
+        date: "2030-06-07 07:29",
+        tags: "flip pieces, new games",
+        url: "sagme/the-power-of-two.html",
+        linkName: "The Power of Two"
+      },
+      {
+        date: "2030-05-31 21:08",
+        tags: "new games, moku",
+        url: "sagme/fractured-toe.html",
+        linkName: "Fractured Toe"
+      },
+      {
+        date: "2030-05-24 16:57",
+        tags: "chess, new games",
+        url: "sagme/fibonacci.html",
+        linkName: "Fibonacci"
+      },
+      {
+        date: "2030-05-17 16:26",
+        tags: "new games, stack pieces",
+        url: "sagme/twisties.html",
+        linkName: "Twisties"
+      },
+      {
+        date: "2030-05-10 07:27",
+        tags: "new games",
+        url: "sagme/quatrix.html",
+        linkName: "Quatrix"
+      },
+      {
+        date: "2030-05-03 15:18",
+        tags: "new games",
+        url: "sagme/triade.html",
+        linkName: "Triade"
+      },
+      {
+        date: "2030-04-26 14:42",
+        tags: "older games",
+        url: "sagme/via-passare.html",
+        linkName: "Via Passare"
+      },
+      {
+        date: "2030-04-19 08:32",
+        tags: "checkers, old games",
+        url: "sagme/jusquaubouto.html",
+        linkName: "Jusquaubouto"
+      },
+      {
+        date: "2030-04-12 07:57",
+        tags: "checkers, flip pieces, old games, 3 players",
+        url: "sagme/desertion.html",
+        linkName: "Desertion"
+      },
+      {
+        date: "2030-04-05 14:42",
+        tags: "old games, stack pieces",
+        url: "sagme/stack.html",
+        linkName: "Stack"
+      },
+      {
+        date: "2030-03-29 20:49",
+        tags: "modern games, new games, stack pieces",
+        url: "sagme/posit.html",
+        linkName: "Posit"
+      },
+      {
+        date: "2030-03-22 15:40",
+        tags: "old games, tile games",
+        url: "sagme/tilez.html",
+        linkName: "Tilez!"
+      },
+      {
+        date: "2030-03-15 15:16",
+        tags: "chess, traditional games",
+        url: "sagme/rek.html",
+        linkName: "Rek"
+      },
+      {
+        date: "2030-03-08 13:36",
+        tags: "older games, checkers",
+        url: "sagme/leapfrog.html",
+        linkName: "Leapfrog"
+      },
+      {
+        date: "2030-03-01 13:16",
+        tags: "old games",
+        url: "sagme/castello.html",
+        linkName: "Castello"
+      },
+      {
+        date: "2030-02-22 21:53",
+        tags: "old games, connection, tile games",
+        url: "sagme/novi.html",
+        linkName: "Novi"
+      },
+      {
+        date: "2030-02-15 09:52",
+        tags: "checkers, old games",
+        url: "sagme/king-s-court.html",
+        linkName: " King's Court"
+      },
+      {
+        date: "2030-02-08 20:54",
+        tags: "older games",
+        url: "sagme/suffragetto.html",
+        linkName: "Suffragetto"
+      },
+      {
+        date: "2030-02-01 09:38",
+        tags: "new games, stack pieces",
+        url: "sagme/jadejack.html",
+        linkName: "JadeJack"
+      },
+      {
+        date: "2030-01-25 11:04",
+        tags: "go, pencil & paper",
+        url: "sagme/pengo.html",
+        linkName: "Pengo"
+      },
+      {
+        date: "2030-01-18 09:21",
+        tags: "flip pieces, checkers, old games",
+        url: "sagme/flip.html",
+        linkName: "Flip"
+      },
+      {
+        date: "2030-01-11 21:00",
+        tags: "older games",
+        url: "sagme/homo.html",
+        linkName: "Homo"
+      },
+      {
+        date: "2030-01-04 20:29",
+        tags: "old games, connection",
+        url: "sagme/imuri.html",
+        linkName: "Imuri"
+      },
+      {
+        date: "2030-01-01 21:17",
+        tags: "art and history",
+        url: "sagme/happy-2030.html",
+        linkName: "Happy 2030"
+      },
+      {
+        date: "2029-12-28 15:26",
+        tags: "go, new games",
+        url: "sagme/or-connek.html",
+        linkName: "Or-Connek"
+      },
+      {
+        date: "2029-12-21 14:22",
+        tags: "new games",
+        url: "sagme/watubi.html",
+        linkName: "Watubi"
+      },
+      {
+        date: "2029-12-14 08:37",
+        tags: "new games",
+        url: "sagme/the-two-pipers.html",
+        linkName: "The Two Pipers"
+      },
+      {
+        date: "2029-12-07 16:21",
+        tags: "chess, new games",
+        url: "sagme/rock-scissors-paper.html",
+        linkName: "Rock, Scissors, Paper "
+      },
+      {
+        date: "2029-11-30 16:05",
+        tags: "old games, tile games",
+        url: "sagme/citadella.html",
+        linkName: "Citadella"
+      },
+      {
+        date: "2029-11-23 08:20",
+        tags: "checkers, new games",
+        url: "sagme/billabong.html",
+        linkName: "Billabong"
+      },
+      {
+        date: "2029-11-16 15:07",
+        tags: "new games, moku",
+        url: "sagme/trio-trio.html",
+        linkName: " Trio Trio"
+      },
+      {
+        date: "2029-11-09 15:40",
+        tags: "dice, new games",
+        url: "sagme/quarr-e.html",
+        linkName: "Quarrée"
+      },
+      {
+        date: "2029-11-02 14:01",
+        tags: "old games",
+        url: "sagme/goal-football-chess.html",
+        linkName: "Goal, Football Chess"
+      },
+      {
+        date: "2029-10-26 12:12",
+        tags: "old games, pencil & paper, tile games",
+        url: "sagme/black-path-game.html",
+        linkName: "Black Path Game"
+      },
+      {
+        date: "2029-10-18 23:55",
+        tags: "older games, moku",
+        url: "sagme/blox-o.html",
+        linkName: "Blox-O"
+      },
+      {
+        date: "2029-10-12 09:30",
+        tags: "chess, older games",
+        url: "sagme/citatel.html",
+        linkName: "Citatel"
+      },
+      {
+        date: "2029-10-12 09:03",
+        tags: "old games",
+        url: "sagme/scoozie.html",
+        linkName: "Scoozie"
+      },
+      {
+        date: "2029-10-05 08:40",
+        tags: "older games, tile games",
+        url: "sagme/road-block.html",
+        linkName: "Road Block"
+      },
+      {
+        date: "2029-09-28 07:53",
+        tags: "older games",
+        url: "sagme/kastellet.html",
+        linkName: "Kastellet"
+      },
+      {
+        date: "2029-09-21 07:00",
+        tags: "new games",
+        url: "sagme/nelaxtam.html",
+        linkName: "Nelaxtam"
+      },
+      {
+        date: "2029-09-14 06:17",
+        tags: "old games, moku",
+        url: "sagme/ten-q.html",
+        linkName: "Ten-Q"
+      },
+      {
+        date: "2029-09-07 11:59",
+        tags: "old games",
+        url: "sagme/troke.html",
+        linkName: "Troke"
+      },
+      {
+        date: "2029-08-31 19:43",
+        tags: "old games, tile games",
+        url: "sagme/pathfinder.html",
+        linkName: " Pathfinder"
+      },
+      {
+        date: "2029-08-24 13:35",
+        tags: "older games, traditional games",
+        url: "sagme/ugolki.html",
+        linkName: "Ugolki"
+      },
+      {
+        date: "2029-08-17 12:42",
+        tags: "old games",
+        url: "sagme/escort.html",
+        linkName: " Escort"
+      },
+      {
+        date: "2029-08-10 12:19",
+        tags: "chess, older games",
+        url: "sagme/blockade.html",
+        linkName: "Blockade"
+      },
+      {
+        date: "2029-08-03 09:35",
+        tags: "old games",
+        url: "sagme/t-game.html",
+        linkName: "T-game"
+      },
+      {
+        date: "2029-07-27 07:12",
+        tags: "new games, connection, pencil & paper",
+        url: "sagme/lynx.html",
+        linkName: "Lynx"
+      },
+      {
+        date: "2029-07-20 15:47",
+        tags: "old games, pencil & paper",
+        url: "sagme/diagares.html",
+        linkName: "Diagares"
+      },
+      {
+        date: "2029-07-13 11:59",
+        tags: "old games, stack pieces",
+        url: "sagme/kengi.html",
+        linkName: "Kengi"
+      },
+      {
+        date: "2029-07-06 07:41",
+        tags: "dominoes, new games",
+        url: "sagme/linkage.html",
+        linkName: "Linkage"
+      },
+      {
+        date: "2029-06-29 21:58",
+        tags: "new games, tile games",
+        url: "sagme/tor.html",
+        linkName: "Tor"
+      },
+      {
+        date: "2029-06-22 13:15",
+        tags: "new games",
+        url: "sagme/selva.html",
+        linkName: "Selva"
+      },
+      {
+        date: "2029-06-15 10:27",
+        tags: "new games, connection",
+        url: "sagme/onyx.html",
+        linkName: "Onyx"
+      },
+      {
+        date: "2029-06-08 10:04",
+        tags: "flip pieces, new games",
+        url: "sagme/isolo.html",
+        linkName: "Isolo"
+      },
+      {
+        date: "2029-06-01 08:36",
+        tags: "boardless, new games, traditional games",
+        url: "sagme/linja.html",
+        linkName: "Linja"
+      },
+      {
+        date: "2029-05-25 20:09",
+        tags: "new games, stack pieces, connection",
+        url: "sagme/mardouk.html",
+        linkName: "Mardouk"
+      },
+      {
+        date: "2029-05-18 17:23",
+        tags: "old games, pencil & paper",
+        url: "sagme/engel.html",
+        linkName: "Engel"
+      },
+      {
+        date: "2029-05-11 16:44",
+        tags: "old games",
+        url: "sagme/rukh-pat.html",
+        linkName: "Rukh-Pat"
+      },
+      {
+        date: "2029-05-04 16:23",
+        tags: "old games",
+        url: "sagme/cluster.html",
+        linkName: "Cluster"
+      },
+      {
+        date: "2029-04-27 10:33",
+        tags: "wall pieces, new games",
+        url: "sagme/sortie-and-bombardment.html",
+        linkName: "Sortie and Bombardment"
+      },
+      {
+        date: "2029-04-20 22:21",
+        tags: "old games, stack pieces",
+        url: "sagme/explocus.html",
+        linkName: "Explocus"
+      },
+      {
+        date: "2029-04-13 19:20",
+        tags: "wall pieces, new games",
+        url: "sagme/house-of-doors.html",
+        linkName: "House of Doors"
+      },
+      {
+        date: "2029-04-06 16:05",
+        tags: "checkers, new games",
+        url: "sagme/madam-x.html",
+        linkName: "Madam X"
+      },
+      {
+        date: "2029-03-30 13:45",
+        tags: "new games, moku",
+        url: "sagme/spider-line4.html",
+        linkName: "Spider Line4"
+      },
+      {
+        date: "2029-03-23 14:26",
+        tags: "chess, new games",
+        url: "sagme/krigspel.html",
+        linkName: "Krigspel"
+      },
+      {
+        date: "2029-03-16 13:43",
+        tags: "game system, new games",
+        url: "sagme/karo.html",
+        linkName: "Karo"
+      },
+      {
+        date: "2029-03-09 12:13",
+        tags: "old games, pencil & paper",
+        url: "sagme/loco.html",
+        linkName: "Loco"
+      },
+      {
+        date: "2029-03-02 10:23",
+        tags: "chess, old games",
+        url: "sagme/mana.html",
+        linkName: "Mana"
+      },
+      {
+        date: "2029-02-23 21:29",
+        tags: "checkers, new games, moku",
+        url: "sagme/trinidad.html",
+        linkName: "Trinidad"
+      },
+      {
+        date: "2029-02-16 20:47",
+        tags: "traditional games",
+        url: "sagme/choko.html",
+        linkName: "Choko"
+      },
+      {
+        date: "2029-02-09 18:09",
+        tags: "flip pieces, new games",
+        url: "sagme/virallo.html",
+        linkName: "Virallo"
+      },
+      {
+        date: "2029-02-02 15:33",
+        tags: "new games, stack pieces",
+        url: "sagme/triangulate.html",
+        linkName: "Triangulate"
+      },
+      {
+        date: "2029-01-26 14:46",
+        tags: "new games",
+        url: "sagme/sidewinder.html",
+        linkName: "Sidewinder"
+      },
+      {
+        date: "2029-01-19 13:51",
+        tags: "new games, stack pieces",
+        url: "sagme/gounki.html",
+        linkName: "Gounki"
+      },
+      {
+        date: "2029-01-12 13:29",
+        tags: "sowing, new games",
+        url: "sagme/buku.html",
+        linkName: "Buku"
+      },
+      {
+        date: "2029-01-05 10:23",
+        tags: "new games, pencil & paper",
+        url: "sagme/alternator.html",
+        linkName: "Alternator"
+      },
+      {
+        date: "2029-01-01 00:00",
+        tags: "art and history",
+        url: "sagme/happy-2029.html",
+        linkName: "Happy 2029"
+      },
+      {
+        date: "2028-12-29 09:21",
+        tags: "older games",
+        url: "sagme/lanrick.html",
+        linkName: "Lanrick"
+      },
+      {
+        date: "2028-12-22 09:52",
+        tags: "new games",
+        url: "sagme/isolate.html",
+        linkName: "Isolate"
+      },
+      {
+        date: "2028-12-15 21:12",
+        tags: "new games, stack pieces",
+        url: "sagme/pilare.html",
+        linkName: "Pilare"
+      },
+      {
+        date: "2028-12-08 15:04",
+        tags: "flip pieces, new games, moku",
+        url: "sagme/yonmoque.html",
+        linkName: "Yonmoque"
+      },
+      {
+        date: "2028-12-01 14:09",
+        tags: "new games",
+        url: "sagme/wellen-halma.html",
+        linkName: "Wellen-Halma"
+      },
+      {
+        date: "2028-11-24 10:39",
+        tags: "old games",
+        url: "sagme/soccolot.html",
+        linkName: "Soccolot"
+      },
+      {
+        date: "2028-11-17 09:08",
+        tags: "new games",
+        url: "sagme/teleporters.html",
+        linkName: "Teleporters"
+      },
+      {
+        date: "2028-11-10 08:10",
+        tags: "new games, connection, tile games",
+        url: "sagme/oroen.html",
+        linkName: "Oroen"
+      },
+      {
+        date: "2028-11-03 20:37",
+        tags: "old games, tile games",
+        url: "sagme/scalino.html",
+        linkName: "Scalino"
+      },
+      {
+        date: "2028-10-27 14:13",
+        tags: "old games, tile games",
+        url: "sagme/cover-up-skirrid-and-sudden-death.html",
+        linkName: "Cover-Up, Skirrid, and Sudden Death!"
+      },
+      {
+        date: "2028-10-20 13:25",
+        tags: "old games, tile games",
+        url: "sagme/hepta.html",
+        linkName: "Hepta"
+      },
+      {
+        date: "2028-10-13 12:52",
+        tags: "old games, tile games",
+        url: "sagme/passage.html",
+        linkName: "Passage"
+      },
+      {
+        date: "2028-10-06 07:32",
+        tags: "old games, tile games",
+        url: "sagme/zig-zag.html",
+        linkName: "Zig Zag"
+      },
+      {
+        date: "2028-09-29 19:52",
+        tags: "old games, tile games",
+        url: "sagme/blockade.html",
+        linkName: "Blockade"
+      },
+      {
+        date: "2028-09-22 17:34",
+        tags: "old games, stack pieces",
+        url: "sagme/twin.html",
+        linkName: "Twin"
+      },
+      {
+        date: "2028-09-15 14:48",
+        tags: "new games, tile games",
+        url: "sagme/reservat.html",
+        linkName: "Reservat"
+      },
+      {
+        date: "2028-09-08 13:08",
+        tags: "old games, connection, tile games",
+        url: "sagme/forma.html",
+        linkName: "Forma"
+      },
+      {
+        date: "2028-09-01 09:35",
+        tags: "new games, tile games",
+        url: "sagme/nasca-foundations-druid.html",
+        linkName: "Nasca, Foundations, Druid"
+      },
+      {
+        date: "2028-08-25 08:49",
+        tags: "old games, tile games",
+        url: "sagme/banda.html",
+        linkName: "Banda"
+      },
+      {
+        date: "2028-08-18 08:23",
+        tags: "new games",
+        url: "sagme/cube-squared.html",
+        linkName: "Cube Squared"
+      },
+      {
+        date: "2028-08-11 07:46",
+        tags: "boardless, new games, tile games, moku",
+        url: "sagme/par-5.html",
+        linkName: "Par: 5"
+      },
+      {
+        date: "2028-08-04 12:41",
+        tags: "new games",
+        url: "sagme/martian-chess.html",
+        linkName: "Martian Chess"
+      },
+      {
+        date: "2028-07-28 11:53",
+        tags: "new games",
+        url: "sagme/cam-l-on.html",
+        linkName: "Caméléon"
+      },
+      {
+        date: "2028-07-21 07:59",
+        tags: "old games, tile games",
+        url: "sagme/q-bits.html",
+        linkName: "Q-bits"
+      },
+      {
+        date: "2028-07-14 07:20",
+        tags: "new games, tile games",
+        url: "sagme/toscana.html",
+        linkName: "Toscana"
+      },
+      {
+        date: "2028-07-07 21:08",
+        tags: "old games, tile games",
+        url: "sagme/vagabondo.html",
+        linkName: "Vagabondo"
+      },
+      {
+        date: "2028-06-30 20:27",
+        tags: "old games, tile games",
+        url: "sagme/tangle.html",
+        linkName: "Tangle"
+      },
+      {
+        date: "2028-06-23 15:16",
+        tags: "old games, connection",
+        url: "sagme/thoughtwave.html",
+        linkName: " Thoughtwave"
+      },
+      {
+        date: "2028-06-16 14:35",
+        tags: "old games, tile games",
+        url: "sagme/pentominoes.html",
+        linkName: "Pentominoes"
+      },
+      {
+        date: "2028-06-09 07:30",
+        tags: "old games, stack pieces",
+        url: "sagme/overlord.html",
+        linkName: "Overlord"
+      },
+      {
+        date: "2028-06-02 21:27",
+        tags: "old games, stack pieces",
+        url: "sagme/quantum.html",
+        linkName: "Quantum"
+      },
+      {
+        date: "2028-05-26 20:01",
+        tags: "old games, stack pieces",
+        url: "sagme/akropolis.html",
+        linkName: "Akropolis"
+      },
+      {
+        date: "2028-05-19 14:30",
+        tags: "old games, new games, moku",
+        url: "sagme/qubic-and-family.html",
+        linkName: "Qubic and family"
+      },
+      {
+        date: "2028-05-12 12:24",
+        tags: "old games, stack pieces",
+        url: "sagme/tower-of-power.html",
+        linkName: "Tower of Power"
+      },
+      {
+        date: "2028-05-05 11:47",
+        tags: "new games, tile games",
+        url: "sagme/1-stein-co.html",
+        linkName: "1 Stein + Co."
+      },
+      {
+        date: "2028-04-28 07:50",
+        tags: "old games, stack pieces",
+        url: "sagme/kontact.html",
+        linkName: "Kontact"
+      },
+      {
+        date: "2028-04-21 07:11",
+        tags: "new games, stack pieces",
+        url: "sagme/towers-of-hamburg.html",
+        linkName: "Towers of Hamburg"
+      },
+      {
+        date: "2028-04-14 19:51",
+        tags: "old games, stack pieces, moku",
+        url: "sagme/colonnes-de-trois.html",
+        linkName: "Colonnes de Trois"
+      },
+      {
+        date: "2028-04-07 19:33",
+        tags: "new games, connection, tile games",
+        url: "sagme/blox.html",
+        linkName: "Blox"
+      },
+      {
+        date: "2028-03-31 12:50",
+        tags: "new games",
+        url: "sagme/tiku.html",
+        linkName: "Tiku"
+      },
+      {
+        date: "2028-03-24 16:33",
+        tags: "old games, stack pieces, moku",
+        url: "sagme/babylon.html",
+        linkName: "Babylon"
+      },
+      {
+        date: "2028-03-17 17:54",
+        tags: "old games, stack pieces",
+        url: "sagme/malawi.html",
+        linkName: "Malawi"
+      },
+      {
+        date: "2028-03-10 14:32",
+        tags: "game system, new games",
+        url: "sagme/vega.html",
+        linkName: "Vega"
+      },
+      {
+        date: "2028-03-03 13:45",
+        tags: "boardless, flip pieces, new games, tile games",
+        url: "sagme/trox.html",
+        linkName: "Trox"
+      },
+      {
+        date: "2028-02-25 11:36",
+        tags: "rotating pieces, new games",
+        url: "sagme/polygone.html",
+        linkName: "Polygone"
+      },
+      {
+        date: "2028-02-18 09:51",
+        tags: "boardless, new games",
+        url: "sagme/tanagra.html",
+        linkName: "Tanagra"
+      },
+      {
+        date: "2028-02-11 09:19",
+        tags: "dice, new games, 3 players",
+        url: "sagme/archimedes.html",
+        linkName: "Archimedes"
+      },
+      {
+        date: "2028-02-04 17:12",
+        tags: "older games, checkers, new games",
+        url: "sagme/bizingo.html",
+        linkName: "Bizingo"
+      },
+      {
+        date: "2028-01-28 15:24",
+        tags: "flip pieces, old games",
+        url: "sagme/pivot.html",
+        linkName: "Pivot"
+      },
+      {
+        date: "2028-01-21 14:57",
+        tags: "new games",
+        url: "sagme/ar-ne.html",
+        linkName: "Arène"
+      },
+      {
+        date: "2028-01-14 14:04",
+        tags: "flip pieces, old games",
+        url: "sagme/archimedes.html",
+        linkName: "Archimedes"
+      },
+      {
+        date: "2028-01-07 13:25",
+        tags: "old games, pencil & paper",
+        url: "sagme/sqez.html",
+        linkName: "Sqez"
+      },
+      {
+        date: "2028-01-01 10:36",
+        tags: "art and history",
+        url: "sagme/happy-2028.html",
+        linkName: "Happy 2028"
+      },
+      {
+        date: "2027-12-31 09:08",
+        tags: "rotating pieces, new games",
+        url: "sagme/rotary.html",
+        linkName: "Rotary"
+      },
+      {
+        date: "2027-12-24 08:28",
+        tags: "rotating pieces, chess, new games",
+        url: "sagme/thataway.html",
+        linkName: "Thataway"
+      },
+      {
+        date: "2027-12-17 07:31",
+        tags: "old games",
+        url: "sagme/contra.html",
+        linkName: "Contra"
+      },
+      {
+        date: "2027-12-10 10:00",
+        tags: "rotating pieces, boardless, new games, tile games",
+        url: "sagme/karel.html",
+        linkName: "Karel"
+      },
+      {
+        date: "2027-12-03 21:47",
+        tags: "new games, pencil & paper",
+        url: "sagme/rockets.html",
+        linkName: "Rockets"
+      },
+      {
+        date: "2027-11-26 16:46",
+        tags: "checkers, new games, stack pieces",
+        url: "sagme/octi.html",
+        linkName: "Octi"
+      },
+      {
+        date: "2027-11-19 16:18",
+        tags: "new games",
+        url: "sagme/astoria.html",
+        linkName: "Astoria"
+      },
+      {
+        date: "2027-11-12 15:52",
+        tags: "rotating pieces, checkers, old games",
+        url: "sagme/barrier.html",
+        linkName: "Barrier"
+      },
+      {
+        date: "2027-11-05 13:35",
+        tags: "dice, new games",
+        url: "sagme/freez.html",
+        linkName: "Freez!"
+      },
+      {
+        date: "2027-10-29 13:58",
+        tags: "dominoes, old games, game system",
+        url: "sagme/le-trioker.html",
+        linkName: "Le Trioker"
+      },
+      {
+        date: "2027-10-22 12:07",
+        tags: "dice, new games",
+        url: "sagme/metis.html",
+        linkName: "Metis"
+      },
+      {
+        date: "2027-10-15 08:15",
+        tags: "old games, tile games",
+        url: "sagme/kinesis.html",
+        linkName: "Kinesis"
+      },
+      {
+        date: "2027-10-08 07:01",
+        tags: "old games, wall pieces",
+        url: "sagme/labyrinth.html",
+        linkName: "Labyrinth"
+      },
+      {
+        date: "2027-10-01 19:57",
+        tags: "chess, old games, dice",
+        url: "sagme/die-check.html",
+        linkName: "Die-Check"
+      },
+      {
+        date: "2027-09-24 07:30",
+        tags: "chess, old games, tile games",
+        url: "sagme/xexex.html",
+        linkName: "Xexex"
+      },
+      {
+        date: "2027-09-17 17:16",
+        tags: "rotating pieces, new games",
+        url: "sagme/ishi-hama.html",
+        linkName: "Ishi-Hama"
+      },
+      {
+        date: "2027-09-10 16:29",
+        tags: "wall pieces, new games",
+        url: "sagme/entrapment.html",
+        linkName: " Entrapment"
+      },
+      {
+        date: "2027-09-03 10:09",
+        tags: "old games",
+        url: "sagme/junta.html",
+        linkName: "Junta"
+      },
+      {
+        date: "2027-08-27 07:00",
+        tags: "old games, new games",
+        url: "sagme/push.html",
+        linkName: "Push"
+      },
+      {
+        date: "2027-08-20 07:46",
+        tags: "older games, checkers",
+        url: "sagme/the-game-of-football-and-tobac.html",
+        linkName: "The Game of Football and Tobac"
+      },
+      {
+        date: "2027-08-13 07:12",
+        tags: "old games",
+        url: "sagme/seejeh.html",
+        linkName: "Seejeh"
+      },
+      {
+        date: "2027-08-06 06:54",
+        tags: "old games",
+        url: "sagme/barricade.html",
+        linkName: "Barricade"
+      },
+      {
+        date: "2027-07-30 06:30",
+        tags: "old games",
+        url: "sagme/push.html",
+        linkName: "Push"
+      },
+      {
+        date: "2027-07-23 13:30",
+        tags: "wall pieces, incomplete rules, new games, moku",
+        url: "sagme/pionmor.html",
+        linkName: "Pionmor"
+      },
+      {
+        date: "2027-07-16 12:52",
+        tags: "rotating pieces, old games",
+        url: "sagme/point-blank.html",
+        linkName: "Point Blank"
+      },
+      {
+        date: "2027-07-09 09:11",
+        tags: "old games, wall pieces, new games",
+        url: "sagme/alcazar-and-other-wall-games.html",
+        linkName: "Alcazar and other Wall Games"
+      },
+      {
+        date: "2027-07-02 08:50",
+        tags: "older games, 3 players",
+        url: "sagme/trio.html",
+        linkName: "Trio"
+      },
+      {
+        date: "2027-06-25 08:22",
+        tags: "old games, wall pieces",
+        url: "sagme/trap.html",
+        linkName: "Trap"
+      },
+      {
+        date: "2027-06-18 07:43",
+        tags: "old games",
+        url: "sagme/les-7-sages.html",
+        linkName: "Les 7 Sages"
+      },
+      {
+        date: "2027-06-11 07:04",
+        tags: "old games, wall pieces",
+        url: "sagme/stranded.html",
+        linkName: "Stranded"
+      },
+      {
+        date: "2027-06-04 14:54",
+        tags: "old games",
+        url: "sagme/boomerang.html",
+        linkName: " Boomerang "
+      },
+      {
+        date: "2027-05-28 14:25",
+        tags: "old games",
+        url: "sagme/armada.html",
+        linkName: "Armada"
+      },
+      {
+        date: "2027-05-21 12:45",
+        tags: "older games",
+        url: "sagme/attention.html",
+        linkName: "Attention!"
+      },
+      {
+        date: "2027-05-14 12:12",
+        tags: "old games, moku",
+        url: "sagme/cavendish.html",
+        linkName: "Cavendish"
+      },
+      {
+        date: "2027-05-10 14:11",
+        tags: "old games, checkers",
+        url: "sagme/rodin.html",
+        linkName: "Rodin"
+      },
+      {
+        date: "2027-05-07 11:41",
+        tags: "old games, wall pieces",
+        url: "sagme/honeycomb.html",
+        linkName: "Honeycomb"
+      },
+      {
+        date: "2027-05-03 17:29",
+        tags: "older games, pencil & paper",
+        url: "sagme/kayles.html",
+        linkName: "Kayles"
+      },
+      {
+        date: "2027-04-30 10:04",
+        tags: "old games, pencil & paper",
+        url: "sagme/plasm.html",
+        linkName: "Plasm"
+      },
+      {
+        date: "2027-04-23 09:39",
+        tags: "old games",
+        url: "sagme/counterstrike.html",
+        linkName: "Counterstrike"
+      },
+      {
+        date: "2027-04-16 08:31",
+        tags: "old games, connection",
+        url: "sagme/antipalos-bridg-it-september.html",
+        linkName: "Antipalos, Bridg-It, September"
+      },
+      {
+        date: "2027-04-09 08:00",
+        tags: "old games",
+        url: "sagme/floating-islands.html",
+        linkName: "Floating Islands"
+      },
+      {
+        date: "2027-04-02 15:45",
+        tags: "old games",
+        url: "sagme/breakthrough.html",
+        linkName: "Breakthrough"
+      },
+      {
+        date: "2027-03-26 16:17",
+        tags: "old games, moku",
+        url: "sagme/jati.html",
+        linkName: "Jati"
+      },
+      {
+        date: "2027-03-19 15:36",
+        tags: "old games",
+        url: "sagme/blokado.html",
+        linkName: "Blokado"
+      },
+      {
+        date: "2027-03-15 11:22",
+        tags: "new games, connection",
+        url: "sagme/crosstrack.html",
+        linkName: "Crosstrack"
+      },
+      {
+        date: "2027-03-12 14:47",
+        tags: "old games",
+        url: "sagme/breakaway.html",
+        linkName: "Breakaway"
+      },
+      {
+        date: "2027-03-05 13:43",
+        tags: "stack pieces, new games",
+        url: "sagme/le-pilea.html",
+        linkName: "Le Pilea"
+      },
+      {
+        date: "2027-02-26 13:15",
+        tags: "old games",
+        url: "sagme/trap-a-check.html",
+        linkName: "Trap-A-Check"
+      },
+      {
+        date: "2027-02-19 10:29",
+        tags: "old games, moku",
+        url: "sagme/tictactics.html",
+        linkName: "TicTactics"
+      },
+      {
+        date: "2027-02-15 09:48",
+        tags: "old games, connection",
+        url: "sagme/waverley.html",
+        linkName: "Waverley"
+      },
+      {
+        date: "2027-02-12 09:51",
+        tags: "rotating pieces, old games",
+        url: "sagme/maritim.html",
+        linkName: "Maritim"
+      },
+      {
+        date: "2027-02-09 14:50",
+        tags: "old games",
+        url: "sagme/3-a-side.html",
+        linkName: "3-A-Side"
+      },
+      {
+        date: "2027-02-05 08:46",
+        tags: "",
+        url: "sagme/mako-carr-s.html",
+        linkName: "Mako Carrés"
+      },
+      {
+        date: "2027-01-29 22:05",
+        tags: "old games",
+        url: "sagme/color-guard.html",
+        linkName: "Color Guard"
+      },
+      {
+        date: "2027-01-26 08:23",
+        tags: "old games, connection",
+        url: "sagme/cross-over.html",
+        linkName: "Cross Over"
+      },
+      {
+        date: "2027-01-22 21:05",
+        tags: "old games, moku",
+        url: "sagme/irensei.html",
+        linkName: "Irensei"
+      },
+      {
+        date: "2027-01-15 18:00",
+        tags: "old games, moku",
+        url: "sagme/energizer.html",
+        linkName: "Energizer"
+      },
+      {
+        date: "2027-01-12 17:19",
+        tags: "old games",
+        url: "sagme/qui-vive.html",
+        linkName: "Qui Vive"
+      },
+      {
+        date: "2027-01-08 13:53",
+        tags: "old games, game system",
+        url: "sagme/sly.html",
+        linkName: "Sly"
+      },
+      {
+        date: "2027-01-05 20:40",
+        tags: "old games, checkers",
+        url: "sagme/stop-gap.html",
+        linkName: "Stop Gap"
+      },
+      {
+        date: "2027-01-01 00:00",
+        tags: "art and history",
+        url: "sagme/happy-2027.html",
+        linkName: "Happy 2027"
+      },
+      {
+        date: "2026-12-29 10:45",
+        tags: "old games, moku",
+        url: "sagme/corner.html",
+        linkName: "Corner"
+      },
+      {
+        date: "2026-12-25 07:28",
+        tags: "old games",
+        url: "sagme/triad.html",
+        linkName: "Triad"
+      },
+      {
+        date: "2026-12-22 08:53",
+        tags: "old games",
+        url: "sagme/cluster.html",
+        linkName: "Cluster"
+      },
+      {
+        date: "2026-12-18 22:29",
+        tags: "old games, moku",
+        url: "sagme/matrix.html",
+        linkName: "Matrix"
+      },
+      {
+        date: "2026-12-15 21:12",
+        tags: "old games, pencil & paper",
+        url: "sagme/odd-even.html",
+        linkName: "Odd & Even"
+      },
+      {
+        date: "2026-12-11 21:30",
+        tags: "old games",
+        url: "sagme/ishi.html",
+        linkName: "Ishi"
+      },
+      {
+        date: "2026-12-08 17:23",
+        tags: "new games, moku",
+        url: "sagme/pin-point.html",
+        linkName: "Pin Point"
+      },
+      {
+        date: "2026-12-04 10:48",
+        tags: "old games",
+        url: "sagme/chikara.html",
+        linkName: "Chikara"
+      },
+      {
+        date: "2026-11-27 22:28",
+        tags: "traditional games",
+        url: "sagme/gol-skuish-and-pretwa.html",
+        linkName: "Gol-skuish and Pretwa"
+      },
+      {
+        date: "2026-11-24 09:59",
+        tags: "old games, tile games",
+        url: "sagme/touchline.html",
+        linkName: "Touchline"
+      },
+      {
+        date: "2026-11-20 18:36",
+        tags: "old games",
+        url: "sagme/la-forteresse.html",
+        linkName: "La Forteresse"
+      },
+      {
+        date: "2026-11-16 13:57",
+        tags: "old games",
+        url: "sagme/hops.html",
+        linkName: "Hops"
+      },
+      {
+        date: "2026-11-13 17:57",
+        tags: "old games",
+        url: "sagme/hexagrams.html",
+        linkName: "Hexagrams"
+      },
+      {
+        date: "2026-11-10 21:46",
+        tags: "old games",
+        url: "sagme/stick-around.html",
+        linkName: "Stick Around"
+      },
+      {
+        date: "2026-11-06 17:31",
+        tags: "old games",
+        url: "sagme/overboard.html",
+        linkName: "Overboard"
+      },
+      {
+        date: "2026-10-31 15:11",
+        tags: "old games, tile games",
+        url: "sagme/locus.html",
+        linkName: "Locus"
+      },
+      {
+        date: "2026-10-27 15:13",
+        tags: "old games, rotating pieces",
+        url: "sagme/captures.html",
+        linkName: "Captures"
+      },
+      {
+        date: "2026-10-23 15:59",
+        tags: "old games, moku",
+        url: "sagme/shove-off.html",
+        linkName: "Shove Off"
+      },
+      {
+        date: "2026-10-20 08:09",
+        tags: "old games",
+        url: "sagme/ins-outs.html",
+        linkName: "Ins & Outs"
+      },
+      {
+        date: "2026-10-16 19:34",
+        tags: "new games, stack pieces",
+        url: "sagme/hoppa.html",
+        linkName: "Hoppa"
+      },
+      {
+        date: "2026-10-13 20:12",
+        tags: "old games, connection",
+        url: "sagme/tri-trac.html",
+        linkName: "Tri-Trac"
+      },
+      {
+        date: "2026-10-09 17:28",
+        tags: "old games, pencil & paper",
+        url: "sagme/closing-in.html",
+        linkName: "Closing In"
+      },
+      {
+        date: "2026-10-06 07:45",
+        tags: "old games, tile games",
+        url: "sagme/the-game-of-ancient-kingdoms.html",
+        linkName: "The Game of Ancient Kingdoms"
+      },
+      {
+        date: "2026-10-02 16:24",
+        tags: "old games, stack pieces",
+        url: "sagme/strata5.html",
+        linkName: "Strata5"
+      },
+      {
+        date: "2026-09-25 13:28",
+        tags: "older games, old games, pencil & paper",
+        url: "sagme/triade-and-the-game-of-pegpen.html",
+        linkName: "Triade and The Game of Pegpen"
+      },
+      {
+        date: "2026-09-22 20:43",
+        tags: "old games, stack pieces",
+        url: "sagme/up-add-em.html",
+        linkName: "Up & add'em!"
+      },
+      {
+        date: "2026-09-18 13:11",
+        tags: "old games, stack pieces",
+        url: "sagme/rescue.html",
+        linkName: "Rescue"
+      },
+      {
+        date: "2026-09-15 13:56",
+        tags: "old games, tile games, moku",
+        url: "sagme/link-up-and-nebula.html",
+        linkName: "Link-Up and Nebula"
+      },
+      {
+        date: "2026-09-11 10:43",
+        tags: "old games, wall pieces",
+        url: "sagme/l-enclos.html",
+        linkName: "L'enclos"
+      },
+      {
+        date: "2026-09-07 15:24",
+        tags: "old games, checkers",
+        url: "sagme/panic-button.html",
+        linkName: "Panic Button"
+      },
+      {
+        date: "2026-09-04 09:15",
+        tags: "older games",
+        url: "sagme/attacco.html",
+        linkName: "Attacco"
+      },
+      {
+        date: "2026-08-28 07:42",
+        tags: "old games",
+        url: "sagme/oktro.html",
+        linkName: "Oktro"
+      },
+      {
+        date: "2026-08-21 16:32",
+        tags: "older games",
+        url: "sagme/les-conspirateurs.html",
+        linkName: "Les Conspirateurs"
+      },
+      {
+        date: "2026-08-14 20:46",
+        tags: "old games",
+        url: "sagme/swish-and-morro.html",
+        linkName: "Swish and Morro"
+      },
+      {
+        date: "2026-08-07 17:14",
+        tags: "older games, stack pieces",
+        url: "sagme/tricolor.html",
+        linkName: "Tricolor"
+      },
+      {
+        date: "2026-07-31 16:49",
+        tags: "older games",
+        url: "sagme/jeux-des-oies-de-mathurin.html",
+        linkName: "Jeux des Oies de Mathurin"
+      },
+      {
+        date: "2026-07-27 14:23",
+        tags: "old games",
+        url: "sagme/fangt-die-m-uschen.html",
+        linkName: "Fangt die Mäuschen!"
+      },
+      {
+        date: "2026-07-24 21:58",
+        tags: "old games",
+        url: "sagme/lancelot.html",
+        linkName: "Lancelot"
+      },
+      {
+        date: "2026-07-21 14:19",
+        tags: "old games",
+        url: "sagme/turnier-castille-claim.html",
+        linkName: "Turnier, Castille, Claim"
+      },
+      {
+        date: "2026-07-17 17:22",
+        tags: "puzzles, old games",
+        url: "sagme/quink.html",
+        linkName: "Quink"
+      },
+      {
+        date: "2026-07-14 17:15",
+        tags: "old games",
+        url: "sagme/maneuver.html",
+        linkName: "Maneuver"
+      },
+      {
+        date: "2026-07-14 13:33",
+        tags: "old games",
+        url: "sagme/avery-close-game.html",
+        linkName: "Avery Close Game"
+      },
+      {
+        date: "2026-07-10 16:25",
+        tags: "old games",
+        url: "sagme/dual.html",
+        linkName: "Dual"
+      },
+      {
+        date: "2026-07-06 13:34",
+        tags: "old games",
+        url: "sagme/fr-si-denkspiel.html",
+        linkName: "Frösi-Denkspiel"
+      },
+      {
+        date: "2026-07-06 08:20",
+        tags: "old games",
+        url: "sagme/give-take.html",
+        linkName: "Give & Take"
+      },
+      {
+        date: "2026-07-03 14:34",
+        tags: "old games, connection",
+        url: "sagme/le-manipulateur.html",
+        linkName: "Le Manipulateur"
+      },
+      {
+        date: "2026-06-26 13:26",
+        tags: "old games",
+        url: "sagme/vaeva.html",
+        linkName: "Vaeva"
+      },
+      {
+        date: "2026-06-22 13:02",
+        tags: "old games, tile games",
+        url: "sagme/wellington.html",
+        linkName: "Wellington"
+      },
+      {
+        date: "2026-06-19 09:46",
+        tags: "old games",
+        url: "sagme/queen-bee.html",
+        linkName: "Queen Bee"
+      },
+      {
+        date: "2026-06-16 16:24",
+        tags: "old games, stack pieces",
+        url: "sagme/discon.html",
+        linkName: "Discon"
+      },
+      {
+        date: "2026-06-12 11:37",
+        tags: "older games, moku",
+        url: "sagme/gomoku-clones.html",
+        linkName: "Gomoku Clones"
+      },
+      {
+        date: "2026-06-05 10:32",
+        tags: "old games, pencil & paper, moku",
+        url: "sagme/line-ups.html",
+        linkName: "Line-Ups"
+      },
+      {
+        date: "2026-05-29 09:36",
+        tags: "old games",
+        url: "sagme/quandary.html",
+        linkName: "Quandary"
+      },
+      {
+        date: "2026-05-26 13:33",
+        tags: "old games, checkers",
+        url: "sagme/on-guard.html",
+        linkName: "On Guard"
+      },
+      {
+        date: "2026-05-24 10:53",
+        tags: "old games, chess",
+        url: "sagme/gambit.html",
+        linkName: "Gambit"
+      },
+      {
+        date: "2026-05-22 16:41",
+        tags: "older games",
+        url: "sagme/stax.html",
+        linkName: "Stax"
+      },
+      {
+        date: "2026-05-19 15:53",
+        tags: "old games",
+        url: "sagme/r-sselsprung.html",
+        linkName: "Rösselsprung"
+      },
+      {
+        date: "2026-05-15 15:24",
+        tags: "older games, incomplete rules",
+        url: "sagme/jeux-des-grandes-manoeuvres.html",
+        linkName: "Jeux des Grandes Manoeuvres"
+      },
+      {
+        date: "2026-05-12 08:44",
+        tags: "old games",
+        url: "sagme/granat.html",
+        linkName: "Granat"
+      },
+      {
+        date: "2026-05-08 13:06",
+        tags: "old games",
+        url: "sagme/pagode.html",
+        linkName: "Pagode"
+      },
+      {
+        date: "2026-05-04 16:23",
+        tags: "old games",
+        url: "sagme/sudden-score.html",
+        linkName: "Sudden Score"
+      },
+      {
+        date: "2026-05-01 09:58",
+        tags: "old games",
+        url: "sagme/atomic-race.html",
+        linkName: "Atomic Race"
+      },
+      {
+        date: "2026-04-30 07:56",
+        tags: "old games",
+        url: "sagme/springline.html",
+        linkName: "Springline"
+      },
+      {
+        date: "2026-04-25 14:11",
+        tags: "old games, dice",
+        url: "sagme/cubulous.html",
+        linkName: "Cubulous"
+      },
+      {
+        date: "2026-04-22 07:03",
+        tags: "old games, moku",
+        url: "sagme/mastergame.html",
+        linkName: "Mastergame"
+      },
+      {
+        date: "2026-04-17 20:37",
+        tags: "old games, connection",
+        url: "sagme/beeline.html",
+        linkName: "Beeline"
+      },
+      {
+        date: "2026-04-11 17:16",
+        tags: "older games",
+        url: "sagme/jeux-de-patineurs.html",
+        linkName: "Jeux de Patineurs"
+      },
+      {
+        date: "2026-04-06 08:56",
+        tags: "incomplete rules, traditional games",
+        url: "sagme/awithlaknakwe.html",
+        linkName: "Awithlaknakwe"
+      },
+      {
+        date: "2026-03-31 08:13",
+        tags: "old games, moku",
+        url: "sagme/pentana.html",
+        linkName: "Pentana"
+      },
+      {
+        date: "2026-03-26 18:16",
+        tags: "new games",
+        url: "sagme/quadringentesimus-quadratum.html",
+        linkName: "Quadringentesimus Quadratum"
+      },
+      {
+        date: "2026-03-22 08:29",
+        tags: "old games",
+        url: "sagme/interaction.html",
+        linkName: "Interaction"
+      },
+      {
+        date: "2026-03-19 09:31",
+        tags: "old games",
+        url: "sagme/confounded.html",
+        linkName: " Confounded "
+      },
+      {
+        date: "2026-03-19 09:08",
+        tags: "old games, pencil & paper",
+        url: "sagme/crosso-and-chains.html",
+        linkName: "Crosso and Chains"
+      },
+      {
+        date: "2026-03-15 20:52",
+        tags: "older games",
+        url: "sagme/torno.html",
+        linkName: "Torno"
+      },
+      {
+        date: "2026-03-09 18:08",
+        tags: "rotating pieces, new games",
+        url: "sagme/les-crocs.html",
+        linkName: "Les Crocs"
+      },
+      {
+        date: "2026-03-05 15:02",
+        tags: "old games, tile games",
+        url: "sagme/orbit.html",
+        linkName: "Orbit"
+      },
+      {
+        date: "2026-03-02 12:33",
+        tags: "old games, stack pieces",
+        url: "sagme/king-of-the-castle.html",
+        linkName: "King of the Castle"
+      },
+      {
+        date: "2026-02-24 08:26",
+        tags: "rotating pieces, old games",
+        url: "sagme/connex-oh.html",
+        linkName: "Connex'Oh"
+      },
+      {
+        date: "2026-02-18 07:38",
+        tags: "older games",
+        url: "sagme/red-white-blue.html",
+        linkName: "Red White Blue"
+      },
+      {
+        date: "2026-02-14 09:41",
+        tags: "old games",
+        url: "sagme/hinck.html",
+        linkName: "Hinck"
+      },
+      {
+        date: "2026-02-11 21:30",
+        tags: "old games",
+        url: "sagme/realm.html",
+        linkName: "Realm"
+      },
+      {
+        date: "2026-02-06 21:01",
+        tags: "old games, wall pieces",
+        url: "sagme/kage.html",
+        linkName: "Kage"
+      },
+      {
+        date: "2026-01-31 17:29",
+        tags: "old games",
+        url: "sagme/caesar-s-game.html",
+        linkName: "Caesar's Game"
+      },
+      {
+        date: "2026-01-26 17:29",
+        tags: "old games, moku",
+        url: "sagme/the-game-is-nirtz.html",
+        linkName: "The Game is Nirtz"
+      },
+      {
+        date: "2026-01-23 16:18",
+        tags: "old games, moku",
+        url: "sagme/caesars.html",
+        linkName: "Caesars"
+      },
+      {
+        date: "2026-01-20 15:38",
+        tags: "old games",
+        url: "sagme/dob-v-n-hradu.html",
+        linkName: "Dobývání Hradu "
+      },
+      {
+        date: "2026-01-17 15:21",
+        tags: "old games, pencil & paper",
+        url: "sagme/duel-masters.html",
+        linkName: "Duel Masters"
+      },
+      {
+        date: "2026-01-12 11:30",
+        tags: "old games, pencil & paper",
+        url: "sagme/xando.html",
+        linkName: "XandO"
+      },
+      {
+        date: "2026-01-07 10:51",
+        tags: "old games, game system",
+        url: "sagme/orion.html",
+        linkName: "Orion"
+      },
+      {
+        date: "2026-01-04 15:24",
+        tags: "old games, rotating pieces",
+        url: "sagme/deflections.html",
+        linkName: "Deflections"
+      },
+      {
+        date: "2026-01-01 00:00",
+        tags: "art and history",
+        url: "sagme/2026.html",
+        linkName: "2026"
+      },
+      {
+        date: "2025-12-30 17:01",
+        tags: "older games, flip pieces",
+        url: "sagme/royal-reversi.html",
+        linkName: "Royal Reversi"
+      },
+      {
+        date: "2025-12-27 16:16",
+        tags: "old games, stack pieces",
+        url: "sagme/pasta.html",
+        linkName: "Pasta"
+      },
+      {
+        date: "2025-12-24 11:43",
+        tags: "wall pieces, new games",
+        url: "sagme/thrall.html",
+        linkName: "Thrall"
+      },
+      {
+        date: "2025-12-21 15:14",
+        tags: "old games",
+        url: "sagme/dioxoid.html",
+        linkName: "Dioxoid"
+      },
+      {
+        date: "2025-12-18 17:33",
+        tags: "cgt, go, new games, pencil & paper",
+        url: "sagme/nogo.html",
+        linkName: "NoGo"
+      },
+      {
+        date: "2025-12-14 14:18",
+        tags: "old games, moku",
+        url: "sagme/megiddo.html",
+        linkName: "Megiddo"
+      },
+      {
+        date: "2025-12-10 14:47",
+        tags: "new games, pencil & paper",
+        url: "sagme/intermezzo.html",
+        linkName: "Intermezzo"
+      },
+      {
+        date: "2025-12-05 17:25",
+        tags: "older games",
+        url: "sagme/the-game-of-passo.html",
+        linkName: "The Game of Passo"
+      },
+      {
+        date: "2025-11-30 15:35",
+        tags: "old games, tile games",
+        url: "sagme/steppe.html",
+        linkName: "Steppe"
+      },
+      {
+        date: "2025-11-26 11:40",
+        tags: "old games",
+        url: "sagme/games-with-othello-pieces-blocs-and-troll.html",
+        linkName: "Games with Othello pieces: Blocs and Troll"
+      },
+      {
+        date: "2025-11-22 09:15",
+        tags: "old games, dice",
+        url: "sagme/duell.html",
+        linkName: "Duell"
+      },
+      {
+        date: "2025-11-19 16:54",
+        tags: "new games, moku",
+        url: "sagme/tris.html",
+        linkName: "Tris"
+      },
+      {
+        date: "2025-11-15 16:57",
+        tags: "chess, older games, incomplete rules",
+        url: "sagme/hexagonia.html",
+        linkName: "Hexagonia"
+      },
+      {
+        date: "2025-11-09 13:43",
+        tags: "chess, old games",
+        url: "sagme/the-commercial-offsprings-of-chess-ploy.html",
+        linkName: "The commercial offsprings of Chess: Ploy"
+      },
+      {
+        date: "2025-11-03 12:59",
+        tags: "chess, old games",
+        url: "sagme/the-commercial-offsprings-of-chess-smess.html",
+        linkName: "The commercial offsprings of Chess: Smess"
+      },
+      {
+        date: "2025-10-29 11:22",
+        tags: "chess, old games",
+        url: "sagme/the-commercial-offsprings-of-chess-wendo.html",
+        linkName: "The commercial offsprings of Chess: Wendo"
+      },
+      {
+        date: "2025-10-22 08:06",
+        tags: "old games, moku",
+        url: "sagme/tic-tac-toe-redux.html",
+        linkName: "Tic-Tac-Toe redux"
+      },
+      {
+        date: "2025-10-18 08:54",
+        tags: "old games",
+        url: "sagme/bantu.html",
+        linkName: "Bantu"
+      },
+      {
+        date: "2025-10-15 07:29",
+        tags: "older games",
+        url: "sagme/atchin.html",
+        linkName: "Atchin"
+      },
+      {
+        date: "2025-10-11 20:51",
+        tags: "old games",
+        url: "sagme/gimel.html",
+        linkName: "Gimel"
+      },
+      {
+        date: "2025-10-05 10:05",
+        tags: "cgt, old games, pencil & paper",
+        url: "sagme/pencil-and-paper-games-blocking.html",
+        linkName: "Pencil and paper games: Blocking"
+      },
+      {
+        date: "2025-09-30 07:34",
+        tags: "pencil & paper, moku",
+        url: "sagme/pencil-and-paper-games-improving-tic-tac-toe.html",
+        linkName: "Pencil and paper games: Improving Tic Tac Toe"
+      },
+      {
+        date: "2025-09-25 20:51",
+        tags: "new games, pencil & paper",
+        url: "sagme/pencil-and-paper-games-dots-and-bugs.html",
+        linkName: "Pencil and paper games: Dots and Bugs"
+      },
+      {
+        date: "2025-09-20 14:47",
+        tags: "texts",
+        url: "sagme/games-and-their-times.html",
+        linkName: "Games and their times"
+      },
+      {
+        date: "2025-09-15 14:08",
+        tags: "new games, pencil & paper, tile games",
+        url: "sagme/catch.html",
+        linkName: "Catch"
+      },
+      {
+        date: "2025-09-11 12:28",
+        tags: "old games",
+        url: "sagme/take-it-away.html",
+        linkName: "Take it Away"
+      },
+      {
+        date: "2025-09-05 20:29",
+        tags: "old games",
+        url: "sagme/nevo.html",
+        linkName: "Nevo"
+      },
+      {
+        date: "2025-08-28 09:59",
+        tags: "new games",
+        url: "sagme/lambchop.html",
+        linkName: "Lambchop"
+      },
+      {
+        date: "2025-08-23 09:06",
+        tags: "new games",
+        url: "sagme/conflict.html",
+        linkName: "Conflict"
+      },
+      {
+        date: "2025-08-15 17:25",
+        tags: "cgt, modern games",
+        url: "sagme/quadraphage-on-winning-ways.html",
+        linkName: "Quadraphage on Winning Ways"
+      },
+      {
+        date: "2025-08-10 15:12",
+        tags: "new games, connection",
+        url: "sagme/quintus.html",
+        linkName: "Quintus"
+      },
+      {
+        date: "2025-08-05 08:30",
+        tags: "new games, pencil & paper",
+        url: "sagme/diagonal.html",
+        linkName: "Diagonal"
+      },
+      {
+        date: "2025-07-31 13:05",
+        tags: "older games, old games, new games, traditional games",
+        url: "sagme/fox-games-part-2.html",
+        linkName: "Fox Games: part 2"
+      },
+      {
+        date: "2025-07-27 10:06",
+        tags: "old games, go",
+        url: "sagme/rosette.html",
+        linkName: "Rosette"
+      },
+      {
+        date: "2025-07-23 07:39",
+        tags: "old games",
+        url: "sagme/turning-point.html",
+        linkName: "Turning Point"
+      },
+      {
+        date: "2025-07-18 07:11",
+        tags: "modern games",
+        url: "sagme/ko-an.html",
+        linkName: "Ko-an"
+      },
+      {
+        date: "2025-07-13 21:13",
+        tags: "older games, old games, new games, traditional games",
+        url: "sagme/fox-games-part-1.html",
+        linkName: "Fox Games: part 1"
+      },
+      {
+        date: "2025-07-07 14:19",
+        tags: "contests, incomplete rules",
+        url: "sagme/concours-international-de-cr-ateurs-de-jeux-de-soci-t.html",
+        linkName: "Concours International de Créateurs de Jeux de Société"
+      },
+      {
+        date: "2025-07-02 12:42",
+        tags: "old games",
+        url: "sagme/ra.html",
+        linkName: "Ra"
+      },
+      {
+        date: "2025-06-26 15:15",
+        tags: "old games",
+        url: "sagme/the-game-of-temples.html",
+        linkName: "The Game of Temples"
+      },
+      {
+        date: "2025-06-22 13:31",
+        tags: "old games, game system",
+        url: "sagme/the-logiquad-game-system.html",
+        linkName: "The LogiQuad Game System"
+      },
+      {
+        date: "2025-06-19 07:56",
+        tags: "old games",
+        url: "sagme/chain-games.html",
+        linkName: "Chain Games"
+      },
+      {
+        date: "2025-06-15 19:25",
+        tags: "older games, moku",
+        url: "sagme/an-old-shape.html",
+        linkName: "An Old Shape"
+      },
+      {
+        date: "2025-06-11 07:06",
+        tags: "boardless, old games, tile games",
+        url: "sagme/hex-nut-and-the-boardless-effect.html",
+        linkName: "Hex-Nut, and the boardless effect"
+      },
+      {
+        date: "2025-06-06 12:24",
+        tags: "checkers, old games",
+        url: "sagme/castello.html",
+        linkName: "Castello"
+      },
+      {
+        date: "2025-06-02 19:29",
+        tags: "older games, checkers, old games",
+        url: "sagme/from-chivalry-to-lancer.html",
+        linkName: "From Chivalry to Lancer"
+      },
+      {
+        date: "2025-05-27 15:59",
+        tags: "old games, pencil & paper",
+        url: "sagme/press-ups.html",
+        linkName: "Press Ups"
+      },
+      {
+        date: "2025-05-21 21:40",
+        tags: "puzzles, tile games",
+        url: "sagme/a-argentinian-old-challenge.html",
+        linkName: "A Argentinian old challenge"
+      },
+      {
+        date: "2025-05-16 17:13",
+        tags: "older games, checkers, old games",
+        url: "sagme/hexagonal-checkers.html",
+        linkName: "Hexagonal Checkers"
+      },
+      {
+        date: "2025-05-11 15:37",
+        tags: "old games, incomplete rules",
+        url: "sagme/spectrum.html",
+        linkName: "Spectrum"
+      },
+      {
+        date: "2025-05-05 13:38",
+        tags: "older games",
+        url: "sagme/brax.html",
+        linkName: "Brax"
+      },
+      {
+        date: "2025-04-30 11:05",
+        tags: "incomplete rules, new games",
+        url: "sagme/atrio.html",
+        linkName: "Atrio"
+      },
+      {
+        date: "2025-04-23 17:34",
+        tags: "old games, tile games",
+        url: "sagme/domain.html",
+        linkName: "Domain"
+      },
+      {
+        date: "2025-04-18 06:24",
+        tags: "old games",
+        url: "sagme/canyon.html",
+        linkName: "Canyon"
+      },
+      {
+        date: "2025-04-13 06:13",
+        tags: "old games",
+        url: "sagme/brainline.html",
+        linkName: "Brainline"
+      },
+      {
+        date: "2025-04-08 16:22",
+        tags: "cgt, boardless, new games, stack pieces",
+        url: "sagme/babylon.html",
+        linkName: "Babylon"
+      },
+      {
+        date: "2025-04-07 18:17",
+        tags: "art and history",
+        url: "sagme/peace.html",
+        linkName: "Peace"
+      },
+      {
+        date: "2025-04-03 08:04",
+        tags: "boardless, older games, checkers",
+        url: "sagme/diy-draughts.html",
+        linkName: "DIY Draughts"
+      },
+      {
+        date: "2025-03-31 17:14",
+        tags: "texts, old games",
+        url: "sagme/some-thoughts-about-identical-development.html",
+        linkName: "Some thoughts about identical development"
+      },
+      {
+        date: "2025-03-24 17:25",
+        tags: "new games, stack pieces",
+        url: "sagme/hong-kong.html",
+        linkName: "Hong Kong"
+      },
+      {
+        date: "2025-03-19 17:07",
+        tags: "old games, 3 players",
+        url: "sagme/shoulder-to-shoulder.html",
+        linkName: " Shoulder to Shoulder"
+      },
+      {
+        date: "2025-03-14 16:49",
+        tags: "old games, stack pieces",
+        url: "sagme/stragone.html",
+        linkName: "Stragone"
+      },
+      {
+        date: "2025-03-05 16:30",
+        tags: "chess, new games, stack pieces",
+        url: "sagme/axom.html",
+        linkName: "Axom"
+      },
+      {
+        date: "2025-02-26 10:47",
+        tags: "old games, new games, moku",
+        url: "sagme/variance-and-shifting-rows.html",
+        linkName: "Variance, and shifting rows"
+      },
+      {
+        date: "2025-02-20 15:30",
+        tags: "old games",
+        url: "sagme/babuschka.html",
+        linkName: "Babuschka"
+      },
+      {
+        date: "2025-02-16 10:03",
+        tags: "older games, puzzles",
+        url: "sagme/hexagons.html",
+        linkName: "Hexagons"
+      },
+      {
+        date: "2025-02-13 15:08",
+        tags: "new games",
+        url: "sagme/the-1-game.html",
+        linkName: "The 1 Game"
+      },
+      {
+        date: "2025-02-10 14:54",
+        tags: "new games",
+        url: "sagme/siesta.html",
+        linkName: "Siesta"
+      },
+      {
+        date: "2025-02-07 15:00",
+        tags: "rotating pieces, old games, moku",
+        url: "sagme/tac-tic-turn.html",
+        linkName: "Tac-Tic-Turn"
+      },
+      {
+        date: "2025-02-03 14:47",
+        tags: "old games, modern games",
+        url: "sagme/pusher-leverage-and-physics.html",
+        linkName: "Pusher, Leverage, and Physics"
+      },
+      {
+        date: "2025-01-29 20:08",
+        tags: "old games",
+        url: "sagme/ascent.html",
+        linkName: "Ascent"
+      },
+      {
+        date: "2025-01-22 14:15",
+        tags: "old games",
+        url: "sagme/kensington.html",
+        linkName: "Kensington"
+      },
+      {
+        date: "2025-01-17 14:01",
+        tags: "old games, dice",
+        url: "sagme/chase.html",
+        linkName: "Chase"
+      },
+      {
+        date: "2025-01-10 11:38",
+        tags: "old games",
+        url: "sagme/tripples.html",
+        linkName: "Tripples"
+      },
+      {
+        date: "2025-01-05 11:36",
+        tags: "incomplete rules, traditional games",
+        url: "sagme/diu-fang.html",
+        linkName: "Diu Fang"
+      },
+      {
+        date: "2024-12-31 23:59",
+        tags: "art and history",
+        url: "sagme/happy-45.html",
+        linkName: "Happy 45²"
+      },
+      {
+        date: "2024-12-27 20:13",
+        tags: "old games",
+        url: "sagme/cabale.html",
+        linkName: "Cabale"
+      },
+      {
+        date: "2024-12-23 15:06",
+        tags: "new games",
+        url: "sagme/connect-4-with-a-twist.html",
+        linkName: "Connect 4 with a twist"
+      },
+      {
+        date: "2024-12-18 10:53",
+        tags: "rotating pieces, old games",
+        url: "sagme/octiles.html",
+        linkName: "Octiles"
+      },
+      {
+        date: "2024-12-15 08:13",
+        tags: "older games, art and history",
+        url: "sagme/an-old-abstract-game.html",
+        linkName: "An old abstract game"
+      },
+      {
+        date: "2024-12-13 14:33",
+        tags: "old games",
+        url: "sagme/quads-galore.html",
+        linkName: "Quads galore"
+      },
+      {
+        date: "2024-12-12 21:25",
+        tags: "",
+        url: "sagme/against-entropy.html",
+        linkName: "Against Entropy"
+      },
+      {
+        date: "2020-12-09 13:57",
+        tags: "old games",
+        url: "sagme/1915-corona.html",
+        linkName: "1915 Corona"
+      },
+      {
+        date: "2020-12-02 13:41",
+        tags: "old games, new games, art and history",
+        url: "sagme/a-game-is-born.html",
+        linkName: "A Game is Born"
+      },
+      {
+        date: "2019-05-29 14:47",
+        tags: "dominoes, new games",
+        url: "sagme/s-i-x-o.html",
+        linkName: "s i*X*O "
+      },
+      {
+        date: "2019-05-22 14:45",
+        tags: "new games",
+        url: "sagme/trings.html",
+        linkName: "TRINGS"
+      },
+      {
+        date: "2019-05-15 14:30",
+        tags: "new games, stack pieces",
+        url: "sagme/tres.html",
+        linkName: "TRES"
+      },
+      {
+        date: "2019-05-08 14:23",
+        tags: "new games, stack pieces",
+        url: "sagme/stacks.html",
+        linkName: "STACKS"
+      },
+      {
+        date: "2019-05-01 14:09",
+        tags: "new games",
+        url: "sagme/klinker.html",
+        linkName: "KLINKER"
+      },
+      {
+        date: "2019-02-20 19:14",
+        tags: "older games",
+        url: "sagme/game-of-the-south-african-war.html",
+        linkName: "Game of the South-African War"
+      },
+      {
+        date: "2015-11-20 12:48",
+        tags: "old games",
+        url: "sagme/not-made-in-germany.html",
+        linkName: "Not Made in Germany"
+      },
+      {
+        date: "2015-09-14 11:46",
+        tags: "old games",
+        url: "sagme/koerier.html",
+        linkName: "KOERIER"
+      },
+      {
+        date: "2015-09-10 11:01",
+        tags: "old games",
+        url: "sagme/kasteel.html",
+        linkName: "KASTEEL"
+      },
+      {
+        date: "2015-09-07 10:50",
+        tags: "old games",
+        url: "sagme/haalmaa.html",
+        linkName: "HAALMAA"
+      },
+      {
+        date: "2015-08-10 10:19",
+        tags: "old games",
+        url: "sagme/sjekkers.html",
+        linkName: "SJEKKERS"
+      },
+      {
+        date: "2015-08-10 10:14",
+        tags: "old games",
+        url: "sagme/kamelen.html",
+        linkName: "KAMELEN"
+      },
+      {
+        date: "2015-08-06 10:50",
+        tags: "flip pieces, old games",
+        url: "sagme/fort-chitral.html",
+        linkName: "FORT CHITRAL"
+      },
+      {
+        date: "2015-08-03 14:19",
+        tags: "old games",
+        url: "sagme/straat.html",
+        linkName: "STRAAT"
+      },
+      {
+        date: "2015-08-03 13:45",
+        tags: "old games",
+        url: "sagme/trangalla.html",
+        linkName: "TRANGALLA"
+      },
+      {
+        date: "2015-06-11 07:51",
+        tags: "new games",
+        url: "sagme/crunching-quax.html",
+        linkName: "CRUNCHING QUAX"
+      },
+      {
+        date: "2015-06-11 07:43",
+        tags: "new games",
+        url: "sagme/coy-lips.html",
+        linkName: "COY LIPS"
+      },
+      {
+        date: "2015-06-05 17:21",
+        tags: "new games",
+        url: "sagme/feedback-morro.html",
+        linkName: "FEEDBACK MORRO"
+      },
+      {
+        date: "2014-07-24 11:01",
+        tags: "",
+        url: "sagme/progressive-quad-lisbon.html",
+        linkName: "PROGRESSIVE QUAD LISBON"
+      },
+      {
+        date: "2014-05-08 08:37",
+        tags: "new games, chess",
+        url: "sagme/12-giveaway-chess.html",
+        linkName: "12* GIVEAWAY CHESS"
+      },
+      {
+        date: "2014-02-12 14:06",
+        tags: "new games, connection",
+        url: "sagme/gonnect-for-sale.html",
+        linkName: "Gonnect for Sale"
+      },
+      {
+        date: "2013-09-16 18:13",
+        tags: "new games, old games",
+        url: "sagme/three-games-with-the-material-of-the-game-com-positie.html",
+        linkName: "Three Games with the material of the game COM:POSITIE"
+      },
+      {
+        date: "2013-09-09 18:20",
+        tags: "new games, old games",
+        url: "sagme/p-u-n-t-m-a-t-c-h.html",
+        linkName: "P U N T-M A T C H"
+      },
+      {
+        date: "2013-07-16 18:28",
+        tags: "old games",
+        url: "sagme/long-tau.html",
+        linkName: "Long Tau"
+      },
+      {
+        date: "2013-07-11 10:18",
+        tags: "old games",
+        url: "sagme/straat.html",
+        linkName: "STRAAT"
+      },
+      {
+        date: "2013-07-01 21:33",
+        tags: "old games",
+        url: "sagme/roadblock.html",
+        linkName: "Roadblock"
+      },
+      {
+        date: "2013-06-24 14:34",
+        tags: "old games",
+        url: "sagme/matoca.html",
+        linkName: "Matoca"
+      },
+      {
+        date: "2013-06-19 17:30",
+        tags: "new games",
+        url: "sagme/sauce.html",
+        linkName: "SAUCE"
+      },
+      {
+        date: "2013-06-18 21:04",
+        tags: "old games",
+        url: "sagme/peg-show-telka.html",
+        linkName: "Peg Show & Telka"
+      },
+      {
+        date: "2013-06-10 18:16",
+        tags: "old games",
+        url: "sagme/wit-begint-en-wint.html",
+        linkName: "Wit Begint en Wint"
+      },
+      {
+        date: "2013-06-06 13:11",
+        tags: "new games",
+        url: "sagme/sabotage-malthus.html",
+        linkName: "SABOTAGE MALTHUS "
+      },
+      {
+        date: "2013-06-04 13:18",
+        tags: "older games",
+        url: "sagme/pontoons.html",
+        linkName: "Pontoons"
+      },
+      {
+        date: "2013-05-29 12:31",
+        tags: "old games",
+        url: "sagme/polyoptomy.html",
+        linkName: "POLYOPTOMY "
+      },
+      {
+        date: "2013-05-08 14:55",
+        tags: "old games",
+        url: "sagme/transet.html",
+        linkName: "Transet"
+      },
+      {
+        date: "2013-04-15 21:02",
+        tags: "old games, BGS",
+        url: "sagme/bgs-2013-david-singmaster-about-vanishing-puzzles.html",
+        linkName: "BGS 2013: David Singmaster about Vanishing Puzzles"
+      },
+      {
+        date: "2013-04-12 15:41",
+        tags: "",
+        url: "sagme/parallelogram.html",
+        linkName: "Parallelogram"
+      },
+      {
+        date: "2013-04-05 10:17",
+        tags: "old games",
+        url: "sagme/queen-bee.html",
+        linkName: "Queen Bee"
+      },
+      {
+        date: "2013-03-29 11:04",
+        tags: "old games",
+        url: "sagme/slim-slimmer-slim.html",
+        linkName: "Slim, Slimmer, Slim"
+      },
+      {
+        date: "2013-03-22 10:25",
+        tags: "old games",
+        url: "sagme/wu-lu.html",
+        linkName: "Wu Lu"
+      },
+      {
+        date: "2013-03-15 10:12",
+        tags: "older games",
+        url: "sagme/shan-tu.html",
+        linkName: "Shan Tu"
+      },
+      {
+        date: "2013-03-08 09:55",
+        tags: "old games",
+        url: "sagme/untitled.html",
+        linkName: "Untitled"
+      },
+      {
+        date: "2013-03-01 09:40",
+        tags: "old games, art and history",
+        url: "sagme/colorito.html",
+        linkName: "Colorito"
+      },
+      {
+        date: "2013-02-22 09:33",
+        tags: "older games, art and history",
+        url: "sagme/the-family-of-foxes-and-geese.html",
+        linkName: "The family of Foxes and Geese"
+      },
+      {
+        date: "2013-02-10 18:38",
+        tags: "",
+        url: "sagme/the-game.html",
+        linkName: "The Game"
+      },
+      {
+        date: "2012-11-14 12:48",
+        tags: "new games",
+        url: "sagme/squirm.html",
+        linkName: "SQUIRM"
+      },
+      {
+        date: "2012-07-26 07:54",
+        tags: "new games",
+        url: "sagme/super-pente.html",
+        linkName: "SUPER-PENTE"
+      },
+      {
+        date: "2012-04-02 08:42",
+        tags: "new games, chess",
+        url: "sagme/truncated-progressive-chess.html",
+        linkName: "TRUNCATED PROGRESSIVE CHESS"
+      },
+      {
+        date: "2012-03-20 10:03",
+        tags: "chess, traditional games, art and history",
+        url: "sagme/board-games-in-oriental-exposition.html",
+        linkName: "Board Games in Oriental Exposition"
+      },
+      {
+        date: "2011-12-05 15:46",
+        tags: "new games",
+        url: "sagme/cross.html",
+        linkName: "CROSS"
+      },
+      {
+        date: "2011-07-27 19:00",
+        tags: "chess",
+        url: "sagme/one-hit-progressive-chess.html",
+        linkName: "ONE-HIT PROGRESSIVE CHESS"
+      },
+      {
+        date: "2011-07-11 11:27",
+        tags: "new games",
+        url: "sagme/caduceus.html",
+        linkName: "CADUCEUS"
+      },
+      {
+        date: "2011-06-06 12:53",
+        tags: "texts",
+        url: "sagme/on-natural-artificial-games.html",
+        linkName: "On Natural & Artificial Games"
+      },
+      {
+        date: "2011-06-01 16:38",
+        tags: "old games",
+        url: "sagme/two-games-for-three-players.html",
+        linkName: "Two Games for Three Players"
+      },
+      {
+        date: "2011-05-27 15:54",
+        tags: "texts, old games, BGS",
+        url: "sagme/board-games-studies-2011.html",
+        linkName: "Board Games Studies 2011"
+      },
+      {
+        date: "2011-05-22 09:08",
+        tags: "old games",
+        url: "sagme/fehde.html",
+        linkName: "Fehde"
+      },
+      {
+        date: "2011-05-21 07:44",
+        tags: "older games, art and history",
+        url: "sagme/transvaal.html",
+        linkName: "Transvaal"
+      },
+      {
+        date: "2011-05-20 08:30",
+        tags: "older games, art and history",
+        url: "sagme/chivalry.html",
+        linkName: "Chivalry"
+      },
+      {
+        date: "2010-11-30 08:38",
+        tags: "new games",
+        url: "sagme/chicken-hexy.html",
+        linkName: "CHICKEN HEXY"
+      },
+      {
+        date: "2010-06-08 06:14",
+        tags: "new games",
+        url: "sagme/go-6-moku.html",
+        linkName: "GO-6-MOKU"
+      },
+      {
+        date: "2010-06-03 05:59",
+        tags: "new games",
+        url: "sagme/tromazons.html",
+        linkName: "TROMAZONS"
+      },
+      {
+        date: "2010-06-01 08:19",
+        tags: "new games",
+        url: "sagme/sesquy.html",
+        linkName: "SESQUY"
+      },
+      {
+        date: "2010-05-18 20:09",
+        tags: "new games",
+        url: "sagme/octatol.html",
+        linkName: "OCTATOL"
+      },
+      {
+        date: "2010-05-11 09:00",
+        tags: "older games",
+        url: "sagme/the-siege-of-paris.html",
+        linkName: "The Siege of Paris"
+      },
+      {
+        date: "2010-05-10 13:21",
+        tags: "older games",
+        url: "sagme/hard-lines.html",
+        linkName: "Hard Lines"
+      },
+      {
+        date: "2010-05-06 09:14",
+        tags: "old games, art and history",
+        url: "sagme/three-old-knight-games.html",
+        linkName: "Three old Knight games"
+      },
+      {
+        date: "2010-05-05 18:09",
+        tags: "art and history",
+        url: "sagme/the-game.html",
+        linkName: "The Game"
+      },
+      {
+        date: "2010-05-05 10:43",
+        tags: "new games, art and history",
+        url: "sagme/games-bgs-2010.html",
+        linkName: "Games @ BGS 2010"
+      },
+      {
+        date: "2010-05-01 16:07",
+        tags: "older games, traditional games, art and history",
+        url: "sagme/ancient-board-games-the-louvre.html",
+        linkName: "Ancient Board Games @ The Louvre"
+      },
+      {
+        date: "2010-04-27 06:26",
+        tags: "new games",
+        url: "sagme/moku-go.html",
+        linkName: "MOKU-GO"
+      },
+      {
+        date: "2010-02-10 14:03",
+        tags: "new games",
+        url: "sagme/penguins.html",
+        linkName: "Penguins"
+      },
+      {
+        date: "2010-01-04 13:02",
+        tags: "new games",
+        url: "sagme/12-tricoleur-hexxagon.html",
+        linkName: "12* TRICOLEUR HEXXAGON"
+      },
+      {
+        date: "2009-12-22 13:10",
+        tags: "new games",
+        url: "sagme/squaruborus.html",
+        linkName: "SQUARUBORUS"
+      },
+      {
+        date: "2009-12-04 14:51",
+        tags: "new games",
+        url: "sagme/tri-hex.html",
+        linkName: "TRI-HEX"
+      },
+      {
+        date: "2009-12-04 14:44",
+        tags: "new games, chess",
+        url: "sagme/truncated-progressive-chess.html",
+        linkName: "Truncated Progressive Chess"
+      },
+      {
+        date: "2009-07-09 20:53",
+        tags: "new games",
+        url: "sagme/134-quikquax.html",
+        linkName: "134*QUIKQUAX"
+      },
+      {
+        date: "2009-07-07 08:44",
+        tags: "new games",
+        url: "sagme/quadratoll.html",
+        linkName: "QUADRATOLL"
+      },
+      {
+        date: "2009-06-08 13:30",
+        tags: "new games",
+        url: "sagme/triangle-quadrex.html",
+        linkName: "TRIANGLE QUADREX"
+      },
+      {
+        date: "2008-12-16 14:35",
+        tags: "new games",
+        url: "sagme/orouborus.html",
+        linkName: "OROUBORUS"
+      },
+      {
+        date: "2008-10-22 21:08",
+        tags: "new games",
+        url: "sagme/go-6-moku-with-restricted-dagger.html",
+        linkName: "GO-6-MOKU with restricted dagger"
+      },
+      {
+        date: "2008-09-29 18:31",
+        tags: "mutators, new games",
+        url: "sagme/flat-earth-dozer-hex.html",
+        linkName: "FLAT-EARTH DOZER-HEX"
+      },
+      {
+        date: "2008-09-16 15:08",
+        tags: "new games",
+        url: "sagme/prime-pickings.html",
+        linkName: "PRIME PICKINGS"
+      },
+      {
+        date: "2008-08-22 08:14",
+        tags: "new games",
+        url: "sagme/3-2-hex.html",
+        linkName: "3/2 HEX"
+      },
+      {
+        date: "2008-08-08 08:24",
+        tags: "new games",
+        url: "sagme/orouborus.html",
+        linkName: "OROUBORUS"
+      },
+      {
+        date: "2008-08-05 10:24",
+        tags: "new games",
+        url: "sagme/y-moku.html",
+        linkName: "Y-MOKU"
+      },
+      {
+        date: "2008-06-26 08:56",
+        tags: "new games",
+        url: "sagme/damello.html",
+        linkName: "Damello"
+      },
+      {
+        date: "2008-06-17 08:19",
+        tags: "new games",
+        url: "sagme/a-progressive-moku.html",
+        linkName: "A Progressive moku"
+      },
+      {
+        date: "2008-06-17 08:08",
+        tags: "new games",
+        url: "sagme/cherry.html",
+        linkName: "CHERRY"
+      },
+      {
+        date: "2008-06-17 07:50",
+        tags: "new games",
+        url: "sagme/push-wood.html",
+        linkName: "PUSH WOOD"
+      },
+      {
+        date: "2008-06-17 07:42",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2008-06-16 09:20",
+        tags: "new games",
+        url: "sagme/go-6-moku.html",
+        linkName: "GO-6-MOKU"
+      },
+      {
+        date: "2008-06-04 11:47",
+        tags: "new games",
+        url: "sagme/free-y.html",
+        linkName: "FREE Y"
+      },
+      {
+        date: "2008-02-13 10:39",
+        tags: "wall pieces, new games",
+        url: "sagme/progressive-fences.html",
+        linkName: "PROGRESSIVE FENCES"
+      },
+      {
+        date: "2007-12-17 23:15",
+        tags: "new games",
+        url: "sagme/quadraphages.html",
+        linkName: "QUADRAPHAGES"
+      },
+      {
+        date: "2007-11-30 15:39",
+        tags: "texts",
+        url: "sagme/abgamers.html",
+        linkName: "AbGamers"
+      },
+      {
+        date: "2007-05-23 21:00",
+        tags: "sagme's diaries",
+        url: "sagme/sagme-s-diaries.html",
+        linkName: "Sagme's Diaries"
+      },
+      {
+        date: "2007-05-17 21:38",
+        tags: "new games",
+        url: "sagme/1222-unrestricted-6-moku.html",
+        linkName: "1222 UNRESTRICTED 6-MOKU"
+      },
+      {
+        date: "2007-05-17 12:36",
+        tags: "new games, connection",
+        url: "sagme/hixt-and-2-twixt.html",
+        linkName: "HIXT and 2-TWIXT"
+      },
+      {
+        date: "2007-05-02 08:23",
+        tags: "new games",
+        url: "sagme/a-multiplication-game.html",
+        linkName: "A multiplication game"
+      },
+      {
+        date: "2007-05-01 08:22",
+        tags: "art and history",
+        url: "sagme/board-games-studies-2007-part-3-the-spielmuseum.html",
+        linkName: "Board Games Studies 2007 (part 3: The Spielmuseum)"
+      },
+      {
+        date: "2007-05-01 07:58",
+        tags: "art and history",
+        url: "sagme/board-games-studies-2007-part-2-the-talks.html",
+        linkName: "Board Games Studies 2007 (part 2: The Talks)"
+      },
+      {
+        date: "2007-04-30 22:26",
+        tags: "new games, art and history",
+        url: "sagme/board-games-studies-2007-part-1-the-games.html",
+        linkName: "Board Games Studies 2007 (part 1: The Games)"
+      },
+      {
+        date: "2007-04-19 22:09",
+        tags: "art and history",
+        url: "sagme/patterns-conimbriga.html",
+        linkName: "Patterns @ Conimbriga"
+      },
+      {
+        date: "2007-04-02 15:31",
+        tags: "new games, chess",
+        url: "sagme/chosen-chess.html",
+        linkName: "CHOSEN CHESS"
+      },
+      {
+        date: "2007-03-30 11:35",
+        tags: "texts, new games",
+        url: "sagme/beat-it-or-eat-it.html",
+        linkName: "BEAT IT OR EAT IT"
+      },
+      {
+        date: "2007-03-24 14:22",
+        tags: "new games",
+        url: "sagme/fano-nim.html",
+        linkName: "FANO NIM"
+      },
+      {
+        date: "2007-03-24 13:57",
+        tags: "new games",
+        url: "sagme/besiege.html",
+        linkName: "BESIEGE"
+      },
+      {
+        date: "2007-03-24 10:40",
+        tags: "go, texts",
+        url: "sagme/area-vs-territory-go-rules.html",
+        linkName: "Area vs Territory Go Rules"
+      },
+      {
+        date: "2007-03-24 10:25",
+        tags: "texts, mutators",
+        url: "sagme/games-operators-aka-mutators.html",
+        linkName: "Games Operators, aka, Mutators"
+      },
+      {
+        date: "2007-03-23 22:07",
+        tags: "chess",
+        url: "sagme/nice-chess-sites.html",
+        linkName: "Nice Chess Sites"
+      },
+      {
+        date: "2007-03-23 21:46",
+        tags: "go, texts",
+        url: "sagme/go-and-the-three-games.html",
+        linkName: "Go and the 'Three Games'"
+      },
+      {
+        date: "2007-03-23 21:33",
+        tags: "new games",
+        url: "sagme/seo-s-unknown-game.html",
+        linkName: "Seo's unknown game"
+      },
+      {
+        date: "2007-03-23 21:21",
+        tags: "go, new games",
+        url: "sagme/ringgo-80-go-20-hex.html",
+        linkName: "RingGo 80% Go 20% Hex"
+      },
+      {
+        date: "2007-03-23 21:16",
+        tags: "mutators, new games, chess, texts",
+        url: "sagme/revolving-games.html",
+        linkName: "Revolving Games"
+      },
+      {
+        date: "2007-03-22 08:22",
+        tags: "new games",
+        url: "sagme/slopro-lisbon.html",
+        linkName: "SloPro LISBON"
+      },
+      {
+        date: "2007-03-20 09:42",
+        tags: "new games",
+        url: "sagme/dispatch-games.html",
+        linkName: "DISPATCH GAMES"
+      },
+      {
+        date: "2007-03-20 09:35",
+        tags: "mutators",
+        url: "sagme/sacrifice-mutator.html",
+        linkName: "Sacrifice Mutator"
+      },
+      {
+        date: "2007-03-20 09:29",
+        tags: "new games",
+        url: "sagme/meta-game.html",
+        linkName: "Meta-Game"
+      },
+      {
+        date: "2007-03-16 21:36",
+        tags: "new games",
+        url: "sagme/more-hex-mokus.html",
+        linkName: "More hex-mokus"
+      },
+      {
+        date: "2007-03-16 21:19",
+        tags: "new games",
+        url: "sagme/hex-mokus.html",
+        linkName: "Hex-mokus"
+      },
+      {
+        date: "2007-03-16 14:30",
+        tags: "new games",
+        url: "sagme/scala.html",
+        linkName: "SCALA"
+      },
+      {
+        date: "2007-03-16 14:26",
+        tags: "new games",
+        url: "sagme/scoring-hex-moku.html",
+        linkName: "SCORING HEX-MOKU"
+      },
+      {
+        date: "2007-03-16 13:33",
+        tags: "texts, connection",
+        url: "sagme/projective-hex.html",
+        linkName: "Projective Hex"
+      },
+      {
+        date: "2007-03-16 09:27",
+        tags: "chess",
+        url: "sagme/chili-sandwich-chess.html",
+        linkName: "Chili Sandwich Chess"
+      },
+      {
+        date: "2007-03-16 09:24",
+        tags: "chess",
+        url: "sagme/delegating-chess.html",
+        linkName: "Delegating Chess"
+      },
+      {
+        date: "2007-03-16 09:15",
+        tags: "texts, mutators",
+        url: "sagme/clues-for-a-conceptual-toolbox-for-the-game-designer.html",
+        linkName: "Clues for a Conceptual Toolbox for the Game Designer"
+      },
+      {
+        date: "2007-03-16 09:09",
+        tags: "new games",
+        url: "sagme/progressive-poker.html",
+        linkName: "PROGRESSIVE POKER"
+      },
+      {
+        date: "2007-03-16 09:00",
+        tags: "puzzles, new games",
+        url: "sagme/cycle-a-game-that-needs-improvement.html",
+        linkName: "Cycle: a game that needs improvement"
+      },
+      {
+        date: "2007-03-16 08:56",
+        tags: "new games, chess",
+        url: "sagme/slowly-progressive-orthodox-ches.html",
+        linkName: "SLOWLY PROGRESSIVE ORTHODOX CHES"
+      },
+      {
+        date: "2007-03-16 08:03",
+        tags: "new games",
+        url: "sagme/quadrex.html",
+        linkName: "QUADREX"
+      },
+      {
+        date: "2007-03-16 07:54",
+        tags: "new games",
+        url: "sagme/quadraphages.html",
+        linkName: "QUADRAPHAGES"
+      },
+      {
+        date: "2007-03-06 22:19",
+        tags: "new games",
+        url: "sagme/1222-unrestricted-6-moku.html",
+        linkName: "1222 UNRESTRICTED 6-MOKU"
+      },
+      {
+        date: "2007-02-22 14:31",
+        tags: "chess",
+        url: "sagme/destroy-and-hydra-bud-an-example.html",
+        linkName: "DESTROY AND HYDRA-BUD (An example)"
+      },
+      {
+        date: "2007-02-12 10:00",
+        tags: "chess",
+        url: "sagme/fragile-progressive-chess.html",
+        linkName: "FRAGILE PROGRESSIVE CHESS"
+      },
+      {
+        date: "2007-02-08 10:29",
+        tags: "go, texts",
+        url: "sagme/a-new-way-to-play-computer-go.html",
+        linkName: "A new way to play computer-Go?"
+      },
+      {
+        date: "2007-02-05 10:25",
+        tags: "puzzles",
+        url: "sagme/kakuro.html",
+        linkName: "Kakuro"
+      },
+      {
+        date: "2007-01-29 13:22",
+        tags: "puzzles",
+        url: "sagme/yajilin.html",
+        linkName: "Yajilin"
+      },
+      {
+        date: "2007-01-26 17:47",
+        tags: "chess",
+        url: "sagme/alternating-weapon-chess.html",
+        linkName: "ALTERNATING WEAPON CHESS"
+      },
+      {
+        date: "2007-01-26 17:34",
+        tags: "new games",
+        url: "sagme/love-y.html",
+        linkName: "LOVE-Y"
+      },
+      {
+        date: "2007-01-22 08:04",
+        tags: "puzzles",
+        url: "sagme/ripple-effect.html",
+        linkName: "Ripple Effect"
+      },
+      {
+        date: "2007-01-19 14:45",
+        tags: "puzzles",
+        url: "sagme/nonogram-aka-paint-by-numbers.html",
+        linkName: "Nonogram (aka Paint By Numbers)"
+      },
+      {
+        date: "2007-01-18 08:51",
+        tags: "puzzles",
+        url: "sagme/kurodoko.html",
+        linkName: "Kurodoko"
+      },
+      {
+        date: "2007-01-16 18:01",
+        tags: "puzzles",
+        url: "sagme/tentai-show.html",
+        linkName: "Tentai Show"
+      },
+      {
+        date: "2007-01-08 09:22",
+        tags: "puzzles",
+        url: "sagme/number-link.html",
+        linkName: "Number Link"
+      },
+      {
+        date: "2007-01-05 19:30",
+        tags: "puzzles",
+        url: "sagme/shikaku-divide-by-box.html",
+        linkName: "Shikaku (Divide by Box)"
+      },
+      {
+        date: "2007-01-04 14:22",
+        tags: "puzzles",
+        url: "sagme/heyawake.html",
+        linkName: "Heyawake"
+      },
+      {
+        date: "2006-12-28 12:23",
+        tags: "puzzles",
+        url: "sagme/nuruomino-aka-lits.html",
+        linkName: "Nuruomino (aka LITS)"
+      },
+      {
+        date: "2006-12-21 13:01",
+        tags: "new games",
+        url: "sagme/diamond-pivots-v-2.html",
+        linkName: "DIAMOND & PIVOTS (v.2)"
+      },
+      {
+        date: "2006-12-21 10:18",
+        tags: "puzzles",
+        url: "sagme/nurikabe.html",
+        linkName: "Nurikabe"
+      },
+      {
+        date: "2006-12-15 15:11",
+        tags: "puzzles",
+        url: "sagme/filomino.html",
+        linkName: "Filomino"
+      },
+      {
+        date: "2006-12-13 07:56",
+        tags: "puzzles",
+        url: "sagme/hitori.html",
+        linkName: "Hitori"
+      },
+      {
+        date: "2006-12-12 14:18",
+        tags: "puzzles",
+        url: "sagme/akari.html",
+        linkName: "Akari"
+      },
+      {
+        date: "2006-12-11 11:04",
+        tags: "puzzles",
+        url: "sagme/hashiwokakero.html",
+        linkName: "Hashiwokakero"
+      },
+      {
+        date: "2006-12-08 16:44",
+        tags: "puzzles",
+        url: "sagme/slitherlink.html",
+        linkName: "Slitherlink"
+      },
+      {
+        date: "2006-12-06 13:21",
+        tags: "puzzles",
+        url: "sagme/masyu.html",
+        linkName: "Masyu"
+      },
+      {
+        date: "2006-12-05 08:00",
+        tags: "puzzles",
+        url: "sagme/futoshiki.html",
+        linkName: "Futoshiki"
+      },
+      {
+        date: "2006-10-26 08:16",
+        tags: "go, mutators, new games",
+        url: "sagme/slow-progressive-go-9x9.html",
+        linkName: "SLOW PROGRESSIVE GO 9x9"
+      },
+      {
+        date: "2006-07-26 08:56",
+        tags: "chess",
+        url: "sagme/hydra-chess.html",
+        linkName: "HYDRA CHESS"
+      },
+      {
+        date: "2006-07-26 08:21",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2006-06-09 08:13",
+        tags: "new games",
+        url: "sagme/monochromatic-whistling.html",
+        linkName: "MONOCHROMATIC WHISTLING"
+      },
+      {
+        date: "2006-05-25 17:40",
+        tags: "chess",
+        url: "sagme/safe-chess-another-sample-game.html",
+        linkName: "SAFE CHESS (another sample game)"
+      },
+      {
+        date: "2006-05-15 17:16",
+        tags: "chess",
+        url: "sagme/destroy-and-bud.html",
+        linkName: "DESTROY AND BUD"
+      },
+      {
+        date: "2006-05-05 18:15",
+        tags: "chess",
+        url: "sagme/spartan-chess.html",
+        linkName: "SPARTAN CHESS"
+      },
+      {
+        date: "2006-04-26 08:19",
+        tags: "chess",
+        url: "sagme/fragile-weapon-chess.html",
+        linkName: "FRAGILE WEAPON CHESS"
+      },
+      {
+        date: "2006-04-20 08:37",
+        tags: "new games",
+        url: "sagme/weituweiqi-a-game-sample.html",
+        linkName: "WEITUWEIQI (a  game sample)"
+      },
+      {
+        date: "2006-04-19 14:22",
+        tags: "",
+        url: "sagme/7x9-chicken-hex-nbsp-a-quick-game-sample.html",
+        linkName: "7x9 CHICKEN HEX&nbsp (a quick game sample)"
+      },
+      {
+        date: "2006-04-10 11:11",
+        tags: "chess",
+        url: "sagme/suicide-bomber-chess-a-game-sample.html",
+        linkName: "SUICIDE BOMBER CHESS (a game sample)"
+      },
+      {
+        date: "2006-04-07 12:15",
+        tags: "mutators, new games",
+        url: "sagme/lovely-4-hexgomoku.html",
+        linkName: "Lovely 4 HexGomoku"
+      },
+      {
+        date: "2006-04-05 11:21",
+        tags: "mutators, new games",
+        url: "sagme/134-tricoleur-hexxagon.html",
+        linkName: "134* TRICOLEUR HEXXAGON"
+      },
+      {
+        date: "2006-03-30 15:16",
+        tags: "mutators, new games",
+        url: "sagme/very-slowly-progressive-y.html",
+        linkName: "VERY SLOWLY PROGRESSIVE Y"
+      },
+      {
+        date: "2006-03-28 15:15",
+        tags: "mutators, new games",
+        url: "sagme/y-using-the-lovely-mutator.html",
+        linkName: "Y using the Lovely mutator"
+      },
+      {
+        date: "2006-03-20 09:02",
+        tags: "new games",
+        url: "sagme/whistling-tricoleur.html",
+        linkName: "WHISTLING TRICOLEUR"
+      },
+      {
+        date: "2006-03-15 10:47",
+        tags: "new games",
+        url: "sagme/chicken-gomoku-yet-another-sample-game.html",
+        linkName: "CHICKEN GOMOKU (yet another sample game)"
+      },
+      {
+        date: "2006-03-08 17:44",
+        tags: "chess",
+        url: "sagme/chicken-chess-a-complete-game.html",
+        linkName: "CHICKEN-CHESS (a complete game)"
+      },
+      {
+        date: "2006-03-02 12:56",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2006-02-23 08:48",
+        tags: "texts",
+        url: "sagme/different-kinds-of-rules.html",
+        linkName: "Different kinds of rules"
+      },
+      {
+        date: "2006-02-21 12:50",
+        tags: "chess",
+        url: "sagme/safe-progressive-chess.html",
+        linkName: "SAFE PROGRESSIVE CHESS"
+      },
+      {
+        date: "2006-02-16 08:58",
+        tags: "new games",
+        url: "sagme/chicken-gomoku-another-sample-game.html",
+        linkName: "CHICKEN GOMOKU (another sample game)"
+      },
+      {
+        date: "2006-02-14 08:57",
+        tags: "chess",
+        url: "sagme/suicide-bomber-chess.html",
+        linkName: "SUICIDE BOMBER CHESS"
+      },
+      {
+        date: "2006-02-10 11:58",
+        tags: "new games",
+        url: "sagme/diaballex.html",
+        linkName: "DIABALLEX"
+      },
+      {
+        date: "2006-02-08 10:39",
+        tags: "chess",
+        url: "sagme/weapon-chess.html",
+        linkName: "WEAPON CHESS"
+      },
+      {
+        date: "2006-02-03 18:14",
+        tags: "chess",
+        url: "sagme/paint-gun-chess.html",
+        linkName: "PAINT-GUN CHESS"
+      },
+      {
+        date: "2006-02-01 18:04",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2006-01-30 11:12",
+        tags: "new games",
+        url: "sagme/chicken-gomoku-a-game-sample.html",
+        linkName: "CHICKEN GOMOKU (a game sample)"
+      },
+      {
+        date: "2006-01-27 14:49",
+        tags: "new games",
+        url: "sagme/abanondas.html",
+        linkName: "ABANONDAS"
+      },
+      {
+        date: "2006-01-23 11:19",
+        tags: "new games",
+        url: "sagme/chicken-gomoku.html",
+        linkName: "CHICKEN GOMOKU"
+      },
+      {
+        date: "2006-01-19 09:14",
+        tags: "chess",
+        url: "sagme/chicken-chess.html",
+        linkName: "CHICKEN CHESS"
+      },
+      {
+        date: "2006-01-16 11:13",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2006-01-12 10:00",
+        tags: "wall pieces, new games",
+        url: "sagme/sas-fences.html",
+        linkName: "SAS FENCES"
+      },
+      {
+        date: "2006-01-09 10:15",
+        tags: "new games",
+        url: "sagme/weituweiqi.html",
+        linkName: "WEITUWEIQI"
+      },
+      {
+        date: "2005-12-15 12:42",
+        tags: "",
+        url: "sagme/slowly-progressive-chess.html",
+        linkName: "Slowly Progressive Chess"
+      },
+      {
+        date: "2005-12-12 09:18",
+        tags: "new games",
+        url: "sagme/diaballex.html",
+        linkName: "DIABALLEX"
+      },
+      {
+        date: "2005-12-07 18:45",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-12-05 19:22",
+        tags: "new games",
+        url: "sagme/election-games-4-4.html",
+        linkName: "Election Games (4/4)"
+      },
+      {
+        date: "2005-11-30 11:16",
+        tags: "puzzles",
+        url: "sagme/cubic.html",
+        linkName: "Cubic"
+      },
+      {
+        date: "2005-11-29 13:20",
+        tags: "new games",
+        url: "sagme/iqishiqi-example.html",
+        linkName: "IQISHIQI example"
+      },
+      {
+        date: "2005-11-28 14:14",
+        tags: "new games",
+        url: "sagme/election-games-3-4.html",
+        linkName: "Election Games (3/4)"
+      },
+      {
+        date: "2005-11-21 09:11",
+        tags: "new games",
+        url: "sagme/election-games-2-4.html",
+        linkName: "Election Games (2/4)"
+      },
+      {
+        date: "2005-11-17 12:30",
+        tags: "new games",
+        url: "sagme/election-games-1-4.html",
+        linkName: "Election Games (1/4)"
+      },
+      {
+        date: "2005-11-14 09:22",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-11-11 18:40",
+        tags: "chess",
+        url: "sagme/royal-hand-grenade-chess.html",
+        linkName: "Royal Hand-Grenade Chess"
+      },
+      {
+        date: "2005-11-08 19:20",
+        tags: "mutators, new games",
+        url: "sagme/1-11-reversi.html",
+        linkName: "1-11 REVERSI"
+      },
+      {
+        date: "2005-11-02 09:29",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-10-27 07:53",
+        tags: "new games",
+        url: "sagme/a-iqishiqi-quick-match.html",
+        linkName: "A IQISHIQI quick match"
+      },
+      {
+        date: "2005-10-24 12:59",
+        tags: "new games",
+        url: "sagme/cross-hairs.html",
+        linkName: "Cross-Hairs"
+      },
+      {
+        date: "2005-10-17 12:36",
+        tags: "new games",
+        url: "sagme/pentaboard.html",
+        linkName: "Pentaboard"
+      },
+      {
+        date: "2005-10-10 15:24",
+        tags: "new games",
+        url: "sagme/torax-part-ii.html",
+        linkName: "TORAX (part II)"
+      },
+      {
+        date: "2005-10-04 15:02",
+        tags: "new games",
+        url: "sagme/torax.html",
+        linkName: "TORAX"
+      },
+      {
+        date: "2005-09-29 06:42",
+        tags: "chess",
+        url: "sagme/fair-chess.html",
+        linkName: "FAIR CHESS"
+      },
+      {
+        date: "2005-09-27 10:04",
+        tags: "wall pieces, new games",
+        url: "sagme/rambo-walls-a-sample-game.html",
+        linkName: "RAMBO WALLS (A sample game)"
+      },
+      {
+        date: "2005-09-23 12:22",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-09-21 10:04",
+        tags: "new games",
+        url: "sagme/flag-grid.html",
+        linkName: "FLAG GRID"
+      },
+      {
+        date: "2005-09-16 11:29",
+        tags: "chess",
+        url: "sagme/slide-chess.html",
+        linkName: "SLIDE-CHESS"
+      },
+      {
+        date: "2005-09-09 18:11",
+        tags: "art and history",
+        url: "sagme/games-amazons.html",
+        linkName: "Games @ Amazons"
+      },
+      {
+        date: "2005-09-05 08:06",
+        tags: "art and history",
+        url: "sagme/games-knossos.html",
+        linkName: "Games @ Knossos"
+      },
+      {
+        date: "2005-09-01 09:20",
+        tags: "chess",
+        url: "sagme/another-taylor-s-ghost.html",
+        linkName: "Another Taylor's Ghost"
+      },
+      {
+        date: "2005-07-28 09:23",
+        tags: "wall pieces, new games",
+        url: "sagme/rambo-walls.html",
+        linkName: "RAMBO Walls"
+      },
+      {
+        date: "2005-07-26 08:44",
+        tags: "chess",
+        url: "sagme/taylor-s-ghost.html",
+        linkName: "Taylor's Ghost"
+      },
+      {
+        date: "2005-07-21 08:45",
+        tags: "chess",
+        url: "sagme/aussie-progressive-chess.html",
+        linkName: "AUSSIE PROGRESSIVE CHESS"
+      },
+      {
+        date: "2005-07-15 12:23",
+        tags: "wall pieces, new games",
+        url: "sagme/sas-walls.html",
+        linkName: "SAS WALLS"
+      },
+      {
+        date: "2005-07-13 10:46",
+        tags: "wall pieces, mutators, new games",
+        url: "sagme/134-amazons-some-notes.html",
+        linkName: "134* Amazons - Some Notes"
+      },
+      {
+        date: "2005-07-11 08:56",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-07-08 13:59",
+        tags: "mutators",
+        url: "sagme/two-uncommon-progressive-variants-2-2.html",
+        linkName: "Two uncommon progressive variants (2/2)"
+      },
+      {
+        date: "2005-07-06 11:25",
+        tags: "mutators",
+        url: "sagme/two-uncommon-progressive-variants-1-2.html",
+        linkName: "Two uncommon progressive variants (1/2)"
+      },
+      {
+        date: "2005-07-04 09:52",
+        tags: "mutators",
+        url: "sagme/neutral-mutator-part-iv.html",
+        linkName: "Neutral Mutator (part IV)"
+      },
+      {
+        date: "2005-06-30 10:39",
+        tags: "mutators",
+        url: "sagme/neutral-mutator-part-iii.html",
+        linkName: "Neutral Mutator (part III)"
+      },
+      {
+        date: "2005-06-27 15:58",
+        tags: "mutators",
+        url: "sagme/neutral-mutator-part-ii.html",
+        linkName: "Neutral Mutator (part II)"
+      },
+      {
+        date: "2005-06-20 11:43",
+        tags: "mutators",
+        url: "sagme/neutral-mutator-part-i.html",
+        linkName: "Neutral Mutator (part I)"
+      },
+      {
+        date: "2005-06-09 12:38",
+        tags: "",
+        url: "sagme/a-new-tiling-for-board-games.html",
+        linkName: "A new tiling for board games?"
+      },
+      {
+        date: "2005-06-06 07:52",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-05-17 14:05",
+        tags: "chess",
+        url: "sagme/hop-chess.html",
+        linkName: "Hop Chess"
+      },
+      {
+        date: "2005-05-09 09:18",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-04-21 11:48",
+        tags: "new games",
+        url: "sagme/ataxx.html",
+        linkName: "Ataxx"
+      },
+      {
+        date: "2005-04-12 08:42",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-04-05 07:58",
+        tags: "mutators",
+        url: "sagme/13-4-progressive-mutator.html",
+        linkName: "13(4) progressive mutator"
+      },
+      {
+        date: "2005-03-21 17:28",
+        tags: "wall pieces, new games",
+        url: "sagme/quoridor-variants.html",
+        linkName: "Quoridor variants"
+      },
+      {
+        date: "2005-03-08 09:20",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-03-04 19:08",
+        tags: "texts",
+        url: "sagme/self-limitation.html",
+        linkName: "Self-limitation"
+      },
+      {
+        date: "2005-02-18 19:36",
+        tags: "sagme's diaries",
+        url: "sagme/trabsact-sagme-diaries.html",
+        linkName: "Trabsact Sagme Diaries"
+      },
+      {
+        date: "2005-02-14 10:10",
+        tags: "new games",
+        url: "sagme/biqala.html",
+        linkName: "BIQALA"
+      },
+      {
+        date: "2005-01-28 09:31",
+        tags: "go",
+        url: "sagme/still-about-a-little-go-change.html",
+        linkName: "Still about a little Go change"
+      },
+      {
+        date: "2005-01-17 14:53",
+        tags: "sagme's diaries",
+        url: "sagme/cost.html",
+        linkName: "Cost"
+      },
+      {
+        date: "2004-12-20 18:47",
+        tags: "new games",
+        url: "sagme/biversi.html",
+        linkName: "BIVERSI"
+      },
+      {
+        date: "2004-12-17 13:00",
+        tags: "texts",
+        url: "sagme/rules-and-other-rules.html",
+        linkName: "Rules and other rules"
+      },
+      {
+        date: "2004-12-09 13:48",
+        tags: "texts",
+        url: "sagme/the-pie-rule.html",
+        linkName: "The PIE rule"
+      },
+      {
+        date: "2004-11-16 17:59",
+        tags: "go",
+        url: "sagme/little-go-change.html",
+        linkName: "Little Go change"
+      },
+      {
+        date: "2004-10-29 12:53",
+        tags: "sagme's diaries",
+        url: "sagme/defeat.html",
+        linkName: "Defeat"
+      },
+      {
+        date: "2004-10-18 17:19",
+        tags: "new games",
+        url: "sagme/send-it.html",
+        linkName: "SEND IT"
+      },
+      {
+        date: "2004-10-12 08:35",
+        tags: "new games",
+        url: "sagme/blockdance.html",
+        linkName: "Blockdance"
+      },
+      {
+        date: "2004-10-11 11:49",
+        tags: "texts",
+        url: "sagme/the-pie-rule.html",
+        linkName: "The PIE Rule"
+      },
+      {
+        date: "2004-09-23 09:56",
+        tags: "art and history",
+        url: "sagme/rythmomachia.html",
+        linkName: "Rythmomachia"
+      },
+      {
+        date: "2004-09-13 08:31",
+        tags: "art and history",
+        url: "sagme/silence.html",
+        linkName: "Silence"
+      },
+      {
+        date: "2004-09-08 16:41",
+        tags: "sagme's diaries",
+        url: "sagme/good4both.html",
+        linkName: "Good4both"
+      },
+      {
+        date: "2004-09-06 17:16",
+        tags: "sagme's diaries",
+        url: "sagme/fun-first.html",
+        linkName: "Fun first"
+      },
+      {
+        date: "2004-07-28 07:44",
+        tags: "texts",
+        url: "sagme/balancing-starts.html",
+        linkName: "Balancing starts"
+      },
+      {
+        date: "2004-07-22 14:05",
+        tags: "sagme's diaries",
+        url: "sagme/rules.html",
+        linkName: "Rules"
+      },
+      {
+        date: "2004-07-20 07:54",
+        tags: "texts",
+        url: "sagme/active-and-passive-games.html",
+        linkName: "Active and Passive Games"
+      },
+      {
+        date: "2004-07-15 07:40",
+        tags: "texts",
+        url: "sagme/fractional-hex.html",
+        linkName: "Fractional Hex"
+      },
+      {
+        date: "2004-07-02 07:48",
+        tags: "sagme's diaries",
+        url: "sagme/loss.html",
+        linkName: "Loss"
+      },
+      {
+        date: "2004-06-29 17:33",
+        tags: "texts",
+        url: "sagme/game-sources.html",
+        linkName: "Game Sources"
+      },
+      {
+        date: "2004-06-24 16:41",
+        tags: "sagme's diaries",
+        url: "sagme/perfection.html",
+        linkName: "Perfection"
+      },
+      {
+        date: "2004-06-21 16:59",
+        tags: "texts",
+        url: "sagme/the-waves-of-fortune.html",
+        linkName: "The Waves of Fortune"
+      },
+      {
+        date: "2004-06-17 07:33",
+        tags: "sagme's diaries",
+        url: "sagme/balance.html",
+        linkName: "Balance"
+      },
+      {
+        date: "2004-06-14 07:41",
+        tags: "new games",
+        url: "sagme/bi-pod.html",
+        linkName: "BI-POD"
+      },
+      {
+        date: "2004-06-09 11:57",
+        tags: "texts",
+        url: "sagme/players.html",
+        linkName: "Players"
+      },
+      {
+        date: "2004-06-07 08:51",
+        tags: "sagme's diaries",
+        url: "sagme/haiku.html",
+        linkName: "Haiku"
+      },
+      {
+        date: "2004-06-04 07:46",
+        tags: "go",
+        url: "sagme/chinese-and-japanese-go-rules.html",
+        linkName: "Chinese and Japanese Go rules"
+      },
+      {
+        date: "2004-06-02 17:45",
+        tags: "mutators, new games",
+        url: "sagme/a-progressive-game-of-y.html",
+        linkName: "A progressive game of Y"
+      },
+      {
+        date: "2004-06-01 07:24",
+        tags: "mutators",
+        url: "sagme/progressive-mutators.html",
+        linkName: "Progressive Mutators"
+      },
+      {
+        date: "2004-05-28 07:35",
+        tags: "sagme's diaries",
+        url: "sagme/similarities.html",
+        linkName: "Similarities"
+      },
+      {
+        date: "2004-05-26 06:43",
+        tags: "sagme's diaries",
+        url: "sagme/non-reversible-moves.html",
+        linkName: "Non-reversible moves"
+      },
+      {
+        date: "2004-05-26 05:54",
+        tags: "sagme's diaries",
+        url: "sagme/further-biographical-remarks-about-our-patron-saint-trabsact-sagme.html",
+        linkName: "Further biographical remarks about our patron saint, Trabsact Sagme."
+      },
+      {
+        date: "2004-05-25 07:53",
+        tags: "sagme's diaries",
+        url: "sagme/sente-gote.html",
+        linkName: "Sente/Gote"
+      },
+      {
+        date: "2004-05-24 18:18",
+        tags: "sagme's diaries",
+        url: "sagme/initio.html",
+        linkName: "Initio"
+      },
+    ];
+
+    let n_filtered = data.length;
+    
+    let currentSort = {
+      column: -1,
+      direction: 'asc'
+    };
+
+    function populateTable() {
+      const tableBody = document.querySelector("#dataTable tbody");
+      tableBody.innerHTML = "";
+
+      data.forEach(item => {
+        const urls  = item.url.split(',').map(url => url.trim());
+        const names = item.linkName.split(',').map(name => name.trim());
+
+        // Match links with their custom names
+        const linksHtml = urls.map((url, index) => {
+          const linkName = names[index] || "Visit"; // fallback if missing
+          return `<a href="${url}" target="_blank">${linkName}</a>`;
+        }).join('');
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td style="text-align: center;">${item.date}</td>
+          <td>${item.tags}</td>
+          <td>${linksHtml}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function filterTable() {
+      const input = document.getElementById("searchInput").value.trim().toLowerCase();
+      const rows = document.querySelectorAll("#dataTable tbody tr");
+
+      if (input === "") {
+        // If search box is empty, show all rows
+        rows.forEach(row => row.style.display = "");
+        n_filtered = data.length;
+        document.getElementById("list-length").textContent = 
+           "Total Posts: " + n_filtered + "/" + data.length;        
+        return;
+      }
+
+      const excludedTerms = input.split(" ").filter(term => term.startsWith("!")).map(term => term.slice(1).trim());
+      const greaterThanTerms = input.split(" ").filter(term => term.startsWith(">")).map(term => parseInt(term.slice(1).trim(), 10));
+      const lessThanTerms = input.split(" ").filter(term => term.startsWith("<")).map(term => parseInt(term.slice(1).trim(), 10));
+      const includedTerms = input.split(" ").filter(term => !term.startsWith("!") && !term.startsWith(">") && !term.startsWith("<")).map(term => term.trim());
+
+      let count_filter = 0;
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const rowText = Array.from(cells).map(cell => cell.textContent.toLowerCase()).join(" ");
+        const rowYear = parseInt(cells[0].textContent.trim(), 10);
+
+        // Check if the row contains any excluded terms
+        const containsExcluded = excludedTerms.some(term => rowText.includes(term));
+        if (containsExcluded) {
+          row.style.display = "none";
+          return;
+        }
+
+        // Check if the row year is greater than any specified in the search
+        const matchesGreaterThan = greaterThanTerms.every(term => rowYear > term);
+
+        // Check if the row year is less than any specified in the search
+        const matchesLessThan = lessThanTerms.every(term => rowYear < term);
+
+        // Check if the row contains all included terms
+        const matchesIncluded = includedTerms.every(term => rowText.includes(term));
+
+        if (matchesIncluded && matchesGreaterThan && matchesLessThan) {
+          row.style.display = "";
+          count_filter += 1
+        } else {
+          row.style.display = "none";
+        }
+      });
+      
+      n_filtered = count_filter;
+      document.getElementById("list-length").textContent = 
+          "Total Posts: " + n_filtered + "/" + data.length;
+
+    }
+
+    function sortTable(columnIndex) {
+      const direction = currentSort.column === columnIndex && 
+                        currentSort.direction === 'asc' ? 'desc' : 'asc';
+      currentSort = { column: columnIndex, direction };
+
+      const keyMap = ["date", "tags", "post"];
+      
+      const sortedData = [...data].sort((a, b) => {
+        let valueA = a[keyMap[columnIndex]].toString().toLowerCase();
+        let valueB = b[keyMap[columnIndex]].toString().toLowerCase();
+
+        if (columnIndex === 0) {         // If sorting by year (numeric)
+          if (isNaN(valueA)) return  1;  // leave NaN at the end of the table
+          if (isNaN(valueB)) return -1;
+          valueA = parseInt(valueA, 10);
+          valueB = parseInt(valueB, 10);
+        }
+
+        if (valueA < valueB) return direction === 'asc' ? -1 :  1;
+        if (valueA > valueB) return direction === 'asc' ?  1 : -1;
+        return 0;
+      });
+
+      // Update table after sorting
+      data.length = 0; // Clear the original array
+      data.push(...sortedData); // Push the sorted data
+
+      // Re-render the table
+      populateTable();
+
+      // Update sorting indicators
+      updateSortingIndicators(columnIndex, direction);
+    }
+
+    function updateSortingIndicators(columnIndex, direction) {
+      const headers = document.querySelectorAll("th");
+      headers.forEach((header, index) => {
+        header.classList.remove("sorted-asc", "sorted-desc");
+        if (index === columnIndex) {
+          header.classList.add(direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+        }
+      });
+    }
+
+    // Populate the table initially
+    populateTable();
+    
+    // Show total number of games at the top of the page
+    document.getElementById("list-length").textContent = 
+        "Total Posts: " + n_filtered + "/" + data.length;
+  </script>
+
+</body>
+</html>

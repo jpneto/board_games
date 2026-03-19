@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>CRUNCHING QUAX</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>CRUNCHING QUAX</h2>
+  <b>Date:</b> 2015-06-11 07:51 | <b>Tags:</b> new games
+  <hr>
+
+23* moves<br />
+<br />
+A line of stones may move in its own direction any number of spaces<br />
+up to its own length.&nbsp;&nbsp;Any friendly stones encountered during<br />
+the move halt the movement.&nbsp;&nbsp;Any same-direction line of opponent<br />
+stones encountered have the nearest stones killed by replacement,<br />
+the maximum number to be killed being the difference of the two<br />
+lengths, with the move stopping only after a maximum such kill<br />
+or before the first blank after any kill.<br />
+<br />
+: A turn consists of<br />
+: EITHER&nbsp;&nbsp; the placement of three NON-LINEAR stones on empty cells,<br />
+: OR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of one move of the above type, followed by a placement.<br />
+<br />
+Whoever first makes a path joining three non-adjacent sides, wins.<br />
+<br />
+<code>
+|&nbsp;&nbsp; abcdefghijklmnopqrstu&nbsp;&nbsp;&nbsp;&nbsp;<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . . . . o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . . . o .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . . . o o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; . o . . . o o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;. . o . x x x . . .&nbsp;&nbsp;&nbsp;&nbsp; 5<br />
+|&nbsp;&nbsp; o o o o x x x x . . .&nbsp;&nbsp;&nbsp;&nbsp;6<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;. . . x x x . . . .&nbsp;&nbsp;&nbsp;&nbsp; 7<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; . . o x . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . . x . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11<br />
+|&nbsp;&nbsp; abcdefghijklmnopqrstu&nbsp;&nbsp; 12<br />
+<br />
+&nbsp;&nbsp; ___ooo___&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___xxx___<br />
+1. ..&nbsp;&nbsp;e6&nbsp;&nbsp;n3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h7&nbsp;&nbsp;k6&nbsp;&nbsp;n5<br />
+2. m4&nbsp;&nbsp;j5&nbsp;&nbsp;g6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i6&nbsp;&nbsp;l5&nbsp;&nbsp;l7<br />
+3. c6&nbsp;&nbsp;f5&nbsp;&nbsp;o2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j7&nbsp;&nbsp;m6&nbsp;&nbsp;p5<br />
+4. f5:h7&nbsp;&nbsp; g8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p5:j5&nbsp;&nbsp; k4<br />
+5. p1&nbsp;&nbsp;o4&nbsp;&nbsp;e8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k4:h7&nbsp;&nbsp; i8<br />
+6. e8:i8&nbsp;&nbsp; f5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;l5:i8&nbsp;&nbsp; l5<br />
+7. l3&nbsp;&nbsp;e4&nbsp;&nbsp;a6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o6&nbsp;&nbsp;j9&nbsp;&nbsp;e10<br />
+8. resign<br />
+</code>
+
+
+</body>
+</html>

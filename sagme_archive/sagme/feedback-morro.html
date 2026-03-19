@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>FEEDBACK MORRO</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>FEEDBACK MORRO</h2>
+  <b>Date:</b> 2015-06-05 17:21 | <b>Tags:</b> new games
+  <hr>
+
+<tt>A line is &gt;=2 friendly stones in any ortho-diagonal direction.
+</tt><tt><br />
+</tt><tt>After the 1st full turn, a player may enter 3 stones (rather than 2)
+</tt><tt><br />
+</tt><tt>if his opponent has a longer line than all his own, (recursively).
+</tt><tt><br />
+</tt><tt>
+</tt><tt><br />
+</tt><tt>The winner is who finishes with the (recursively) longest such line.
+</tt><tt><br />
+</tt><tt>
+</tt><tt><br /></tt><br />
+<tt><code></code></tt><br />
+<span style="font-family: monospace;">&nbsp;a b c d e f g h i&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;X x X x x x o . .&nbsp;&nbsp; 1</span><br />
+<span style="font-family: monospace;">&nbsp;. . . . x o o x o&nbsp;&nbsp; 2</span><br />
+<span style="font-family: monospace;">&nbsp;. o . x x . x o o&nbsp;&nbsp; 3</span><br />
+<span style="font-family: monospace;">&nbsp;. x x o x o o o x&nbsp;&nbsp; 4</span><br />
+<span style="font-family: monospace;">&nbsp;. o o o x o x o x&nbsp;&nbsp; 5</span><br />
+<span style="font-family: monospace;">&nbsp;. . . x o x o o x&nbsp;&nbsp; 6</span><br />
+<span style="font-family: monospace;">&nbsp;. . x o x o x o x&nbsp;&nbsp; 7</span><br />
+<span style="font-family: monospace;">&nbsp;. X x o x o . o x&nbsp;&nbsp; 8</span><br />
+<span style="font-family: monospace;">&nbsp;. o x x x x x x o&nbsp;&nbsp; 9</span><br />
+<span style="font-family: monospace;">&nbsp;a b c d e f g h i&nbsp;&nbsp;</span><br />
+<span style="font-family: monospace;"><br /></span>
+<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp; __xxx_________ooo___</span><br />
+<span style="font-family: monospace;">&nbsp;1.&nbsp;&nbsp;..&nbsp;&nbsp;e5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d4&nbsp;&nbsp;f4&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;2.&nbsp;&nbsp;e3&nbsp;&nbsp;e7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e6&nbsp;&nbsp;h6&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;3.&nbsp;&nbsp;b4&nbsp;&nbsp;g5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h4&nbsp;&nbsp;d8&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;4.&nbsp;&nbsp;i5&nbsp;&nbsp;e1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f2&nbsp;&nbsp;f8&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;5.&nbsp;&nbsp;g3&nbsp;&nbsp;g7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i2&nbsp;&nbsp;h8&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;6.&nbsp;&nbsp;c8&nbsp;&nbsp;i8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g2&nbsp;&nbsp;d5&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;7.&nbsp;&nbsp;e2 e4 d6&nbsp;&nbsp;&nbsp;&nbsp;h3&nbsp;&nbsp;h5 h7</span><br />
+<span style="font-family: monospace;">&nbsp;8.&nbsp;&nbsp;h2 d3 h9&nbsp;&nbsp;&nbsp;&nbsp;b3&nbsp;&nbsp;g6&nbsp;</span><br />
+<span style="font-family: monospace;">&nbsp;9.&nbsp;&nbsp;c4 c7 e8&nbsp;&nbsp;&nbsp;&nbsp;c5&nbsp;&nbsp;f7&nbsp;</span><br />
+<span style="font-family: monospace;">10.&nbsp;&nbsp;i4 i6 i7&nbsp;&nbsp;&nbsp;&nbsp;i3&nbsp;&nbsp;i9&nbsp;</span><br />
+<span style="font-family: monospace;">11.&nbsp;&nbsp;b1 d1 f1&nbsp;&nbsp;&nbsp;&nbsp;g1 f5</span><br />
+<span style="font-family: monospace;">12.&nbsp;&nbsp;c9 f9 f6&nbsp;&nbsp;&nbsp;&nbsp;g4 d7</span><br />
+<span style="font-family: monospace;">13.&nbsp;&nbsp;d9 e9 g9&nbsp;&nbsp;&nbsp;&nbsp;b5 b9&nbsp;</span><br />
+<span style="font-family: monospace;">14.&nbsp;&nbsp;b8 a1 c1&nbsp;&nbsp;&nbsp;&nbsp;resign</span><br />
+<span style="font-family: monospace;"><br /></span>
+<span style="font-family: monospace;">Larger lines:</span><br />
+<tt>
+</tt><tt>&nbsp;xxx: 6 6 5 5 4...</tt><tt><br />
+</tt><tt>&nbsp;ooo: 6 6 &nbsp; &nbsp; 4...</tt><br />
+<tt></tt>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>PUSH WOOD</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>PUSH WOOD</h2>
+  <b>Date:</b> 2008-06-17 07:50 | <b>Tags:</b> new games
+  <hr>
+
+(by Richard Nowakowski, 2003)<br /><br />Play on a line of N dots (this is an 1D game) each player has M pieces on the line extremes. For e.g., if N=9 and M=3:<br /><p><center><code>x x x . . . o o o</code></center></p><br />On each turn, each player may:<br />* move forward a friendly stone to any empty cell or move out of the board (jumps are allowed).<br />* push a friendly stone backwards if it is backward adjacent to an enemy stone. Every stone in that group is pushed backwards any number of cells until it finds another stone. If there are no more stones, the player may even push out the group or part of the group over the line extreme.<br />* There is a KO rule: a player cannot repeat the previous position (variant: the player cannot push back any stone that was pushed back in the previous move).<br /><br />Wins the last player that has a legal move.<br /><br />A sample:<br /><br /><center><code><br />x x x . . . o o o<br />x x . x . . o o o<br />x x . x o . . o o<br />. x x x o . . o o<br />. x x x o . o . o<br />. x x . o x o . o<br />. x x . . o x o o<br />. x x . o x . o o<br />. x x . o x o . o<br />. x . . o x o x o<br />. x . . . . . . o<br />. . x . . . . . o<br />. . x . . . . o .<br />. . . x . . . o .<br />. . . x . . o . .<br />. . . . x . o . .<br />. . . . x o . . .<br /><br />x resigns<br /></code></center>
+
+</body>
+</html>

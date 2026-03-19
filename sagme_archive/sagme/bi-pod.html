@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>BI-POD</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>BI-POD</h2>
+  <b>Date:</b> 2004-06-14 07:41 | <b>Tags:</b> new games
+  <hr>
+
+BIPOD (c) 2004 Bill Taylor
+<br />
+<br />It is played on a trapezium-shaped hex board, with two cells on the long side occupied by different coloured pieces, so that the colour-colour and colour-corner empty-cell numbers are equal:
+<br /><code>_______________________________
+<br />. . . . . @ . . . . Q . . . . . 1
+<br />&nbsp;. . . . . . . . . . . . . . .&nbsp;&nbsp;2
+<br />&nbsp;&nbsp;. . . . . . . . . . . . . .&nbsp;&nbsp; 3
+<br />&nbsp;&nbsp; . . . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;4
+<br />&nbsp;&nbsp;&nbsp;&nbsp;. . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 5
+<br />&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6
+<br />=`abcdefghijklmnopqrstuvwxyz-';</code>
+<br />
+<br />The two players alternate in placing a single(*) blocking stone in any empty cell.&nbsp;&nbsp;On any turn, a player may elect instead to "adopt" the running option.&nbsp;&nbsp;The other player then becomes the Blocker, and continues playing single blocks on each turn. The Runner now plays single stones of whichever starting colour he chooses for that turn.
+<br />
+<br />Runner wins if he can create two paths, one from each of his start cells, in the appropriate colours, to any points on any of the three short sides. Blocker wins if Runner has failed in his goal when all the cells are filled.
+<br />
+<br />(*) It is recommended that for email play, the players agree to play any number of stones they like, between one and (say) three inclusive.
+<br />
+<br />*************
+<br />
+<br />Sample Game:
+<br />
+<br /><code> 1. e13f2&nbsp;&nbsp; su3
+<br /> 2. a3c3&nbsp;&nbsp; adopt</code>
+<br />
+<br />Move 3 does not have impact in the position, so in fact it is a pass to see if Second places another stone. But Second adopts.
+<br /><code>_______________________________
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x . @ . . . . Q . . . . . 1
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x . . . . . . . . . . .&nbsp;&nbsp;2
+<br />&nbsp;&nbsp;x x x . . . . . . x x . . .&nbsp;&nbsp; 3
+<br />&nbsp;&nbsp; . . . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;4
+<br />&nbsp;&nbsp;&nbsp;&nbsp;. . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 5
+<br />&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6
+<br />=`abcdefghijklmnopqrstuvwxyz-';
+<br />
+<br /> 3. v2 o&nbsp;&nbsp;&nbsp;&nbsp;j4</code>
+<br />
+<br />While First saves the right position, Second tries to block the left sector.
+<br /><code>_______________________________
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x . @ . . . . Q . . . . . 1
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x . . . . . . . o . . .&nbsp;&nbsp;2
+<br />&nbsp;&nbsp;x x x . . . . . . x x . . .&nbsp;&nbsp; 3
+<br />&nbsp;&nbsp; . . . . x . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;4
+<br />&nbsp;&nbsp;&nbsp;&nbsp;. . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 5
+<br />&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6
+<br />=`abcdefghijklmnopqrstuvwxyz-';
+<br />
+<br />4. g3 o&nbsp;&nbsp;&nbsp;&nbsp;h2 
+<br />5. j2 o&nbsp;&nbsp;&nbsp;&nbsp;i3
+<br />6. m3 o</code>
+<br />
+<br />First then makes a threat at g3, which provides extra space.
+<br /><code>_______________________________
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x . @ . . . . Q . . . . . 1
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x x o . . . . . O . . .&nbsp;&nbsp;2
+<br />&nbsp;&nbsp;x x x o x . o . . x x . . .&nbsp;&nbsp; 3
+<br />&nbsp;&nbsp; . . . . x . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;4
+<br />&nbsp;&nbsp;&nbsp;&nbsp;. . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp; 5
+<br />&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . . . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6
+<br />=`abcdefghijklmnopqrstuvwxyz-';
+<br />
+<br />&nbsp;6...&nbsp;&nbsp;&nbsp;&nbsp; m5 
+<br />&nbsp;7. p4 o&nbsp;&nbsp;y3 
+<br />&nbsp;8. w3 O&nbsp;&nbsp;x4
+<br />&nbsp;9. v4 O&nbsp;&nbsp;w5
+<br />10. u5 O&nbsp;&nbsp;v6
+<br />11. t6 O&nbsp;&nbsp;p6
+<br />12. resigns&nbsp;&nbsp;</code>
+<br />
+<br />But even that extension is not enough because Second uses the right white pieces to block part of the way of the left white pieces.
+<br /><code>_______________________________
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x . @ . . . . Q . . . . .&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x x o . . . . . O . . .&nbsp;&nbsp; 
+<br />&nbsp;&nbsp;x x x o x . o . . x x O x .&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp; . . . . x . . o . . O x .&nbsp;&nbsp;&nbsp;&nbsp; 
+<br />&nbsp;&nbsp;&nbsp;&nbsp;. . . . . x . . . O x .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br />&nbsp;&nbsp;&nbsp;&nbsp; . . . . . . x . O x .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br />=`abcdefghijklmnopqrstuvwxyz-';</code>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Delegating Chess</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Delegating Chess</h2>
+  <b>Date:</b> 2007-03-16 09:24 | <b>Tags:</b> chess
+  <hr>
+
+1. Like FIDE Chess, except:<br />2. Non royal pieces move (capture) like one of the friendly pieces that can move (capture) to its square. In the case of Pawns, they give their diagonal forward capture to friendly pieces in the squares they could capture to, and their forward non-capturing move to a friendly piece right in front of them on the square they could otherwise move to.<br />3. There is no castling.<br />4. There is no Pawn double-move or en-passant capture.<br /><br />Notes:<br /><br />    * A non royal piece which is not in the moving (capturing) range of another piece of the same color, cannot move (capture).<br />    * The King moves and captures like the FIDE King.<br />    * There is still Pawn promotion on last rank.<br /><br />Sample<code><br /><br />Q c . k . . .<br />p . . . . . .<br />. . n . . b .<br />. . . . . . .<br />. . . . . q .<br />. . . . . . N<br />. . . . . . .<br />. . . . . . .<br />. . . . . . p<br />. O . . . . .<br />. . . . . . .<br />R . C K . . Q<br /><br />1. b3-e5+ (since Cc1 can move to b3, the pawn may move like the Cardinal)<br />1...  Nc10-d8 (to protect the King, he also could move like the Cardinal at b12)<br /><br />Q c . k . . .<br />p . . . . . .<br />. . . . . b .<br />. . . . . . .<br />. . . n . q .<br />. . . . . . N<br />. . . . . . .<br />. . . . . . .<br />. . . O . . p<br />. . . . . . .<br />. . . . . . .<br />R . C K . . Q<br /><br />2. Kd2 (freeing the Cardinal to move like the Queen at g1)<br />2...  Q:g7 (it also uses the power of Cb12)<br /><br />Q c . k . . .<br />p . . . . . .<br />. . . . . b .<br />. . . . . . .<br />. . . n . . .<br />. . . . . . q<br />. . . . . . .<br />. . . . . . .<br />. . . O . . p<br />. . . . . . .<br />. . . K . . .<br />R . C . . . Q<br /><br />3. d4:g4 (attacking the Queen at g7 with the power of Qg1)<br />3...  Qe9+ (the check is because of the Knight)<br /><br />Q c . k . . .<br />p . . . . . .<br />. . . . . b .<br />. . . . q . .<br />. . . n . . .<br />. . . . . . .<br />. . . . . . .<br />. . . . . . .<br />. . . . . . O<br />. . . . . . .<br />. . . K . . .<br />R . C . . . Q<br /><br />4. g4-e4<br />4...  C:a12 (capturing the useless Queen)<br /><br />c . . k . . .<br />p . . . . . .<br />. . . . . b .<br />. . . . q . .<br />. . . n . . .<br />. . . . . . .<br />. . . . . . .<br />. . . . . . .<br />. . . O . . .<br />. . . . . . .<br />. . . K . . .<br />R . C . . . Q<br /><br />5. Cc2 (giving Rook powers to the Queen, and C+Q powers to the Rook).<br />   and so on...</code>
+
+</body>
+</html>

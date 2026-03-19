@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>SQUIRM</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>SQUIRM</h2>
+  <b>Date:</b> 2012-11-14 12:48 | <b>Tags:</b> new games
+  <hr>
+
+DROP - On each turn, pass or drop 1 or 2 stones into empty cells.<br />
+SNAKE - A maximal connected group of stones of the same color,&nbsp;with each stone adjacent to either 1 or 2 friendly stones.<br />
+<br />
+GOAL - If two successive passes, the recursively longest snake wins.<br />
+<br />
+<code>
+&nbsp;&nbsp;&nbsp;&nbsp;__OO_______XX___<br />
+&nbsp;1.&nbsp;&nbsp;.. e5&nbsp;&nbsp;&nbsp;&nbsp;h4 h6<br />
+&nbsp;2.&nbsp;&nbsp;g3 g7&nbsp;&nbsp;&nbsp;&nbsp;f4 f6<br />
+&nbsp;3.&nbsp;&nbsp;i5 d6&nbsp;&nbsp;&nbsp;&nbsp;j4 j6<br />
+&nbsp;4.&nbsp;&nbsp;k5 e7&nbsp;&nbsp;&nbsp;&nbsp;d4 j8<br />
+&nbsp;5.&nbsp;&nbsp;l4 k7&nbsp;&nbsp;&nbsp;&nbsp;k3 m3<br />
+&nbsp;6.&nbsp;&nbsp;n4 i7&nbsp;&nbsp;&nbsp;&nbsp;o3 o5<br />
+&nbsp;7.&nbsp;&nbsp;p4 l8&nbsp;&nbsp;&nbsp;&nbsp;n8 k9<br />
+&nbsp;8.&nbsp;&nbsp;q5 m9&nbsp;&nbsp;&nbsp;&nbsp;c5 p6<br />
+&nbsp;9.&nbsp;&nbsp;o7 g9&nbsp;&nbsp;&nbsp;&nbsp;b6 h2<br />
+10.&nbsp;&nbsp;i1 d2&nbsp;&nbsp;&nbsp;&nbsp;f2 m1<br />
+11.&nbsp;&nbsp;e1 e9&nbsp;&nbsp;&nbsp;&nbsp;g1 k1<br />
+12.&nbsp;&nbsp;g5 i9&nbsp;&nbsp;&nbsp;&nbsp;resign<br />
+<br />
+Final Position:<br />
+<br />
+| abcdefghijklmnopqr<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; o x o x x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;o x x . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.<br />
+|&nbsp;&nbsp; . . o . x x x&nbsp;&nbsp;&nbsp;&nbsp; 3.<br />
+|&nbsp;&nbsp;. x x x x o o o&nbsp;&nbsp;&nbsp;&nbsp;4.<br />
+| . x o o o o . x o&nbsp;&nbsp; 5.<br />
+|&nbsp;&nbsp;x o x x x . . x&nbsp;&nbsp;&nbsp;&nbsp;6.<br />
+|&nbsp;&nbsp; . o o o o . o&nbsp;&nbsp;&nbsp;&nbsp; 7.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;. . . x o x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; o o o x o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9.<br />
+| abcdefghijklmnopqr 10.<br />
+</code>
+XX resigns not because the 1st group is bigger. In fact, the first&nbsp;two groups will be equal: 1st have size 15, then the next groups&nbsp;have size 7. Only then, the 3rd o-group have size 3, while the x-group&nbsp;has size 2<br />
+<br />
+If the players made all the moves, the board would become:<br />
+<br />
+<code>
+| abcdefghijklmnopqr<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; o x o x x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;o x x o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.<br />
+|&nbsp;&nbsp; . o o o x x x&nbsp;&nbsp;&nbsp;&nbsp; 3.<br />
+|&nbsp;&nbsp;. x x x x o o o&nbsp;&nbsp;&nbsp;&nbsp;4.<br />
+| . x o o o o x x o&nbsp;&nbsp; 5.<br />
+|&nbsp;&nbsp;x o x x x x o x&nbsp;&nbsp;&nbsp;&nbsp;6.<br />
+|&nbsp;&nbsp; x o o o o . o&nbsp;&nbsp;&nbsp;&nbsp; 7.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp;x x x x o x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.<br />
+|&nbsp;&nbsp;&nbsp;&nbsp; o o o x o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9.<br />
+| abcdefghijklmnopqr 10.</code>
+
+
+</body>
+</html>

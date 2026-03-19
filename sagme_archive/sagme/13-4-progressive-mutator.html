@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>13(4) progressive mutator</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>13(4) progressive mutator</h2>
+  <b>Date:</b> 2005-04-05 07:58 | <b>Tags:</b> mutators
+  <hr>
+
+Amazons is another example of a game using the progressive 13(4) mutator. So, the first player makes one move, then the second player makes three moves, and then, on every remaining turn, both players make four moves. There is a restriction (we should always attach restrictions to progressive mutators): a piece can only move once per turn. Here is a board after 7 moves:<br /><code><br />a b c d e f g h i j k l m n o p q r s       <br />. . . # y # . . . . . y . . . o . . .  1 <br />. . . . # # . # . . . . . . . y . . .  2 <br />y . . . # . # . . . . . . . . . . . .  3 <br />. # # # # . # . . . . . . . . . . . .  4 <br />. # . . # . . . . o . . . . . . . . .  5 <br /># # . . . . . . . . . . . . . . . . .  6 <br /># . . . . o # . . . . . . . . . . . .  7 <br />. . . # . . . . . . . . . . . . . . o  8 <br />. . . y . . . . . . . . . . . . . . .  9 <br />. . . . . . . . . . . . . . . . . . .  10 <br />. . . . # o . . . . . o . . . . . . .  11 <br />. . . . y . . . . . . . . . . . . . .  12 <br />. . . y . . . . . . . . . . . . . . .  13 <br />. . . . # . . . . . . . . . . . . . .  14 <br />. . . # . . . . . . . . . . . . . . .  15 <br />. . . y o . . . . . . . . . . . . . o  16 <br />. . . # . . . . . . . . . . . . . . .  17 <br />. . . . . . . . . . . . . . . . . . .  18 <br />. . . . . . . . # . . . . . . . . . .  19 <br />a b c d e f g h i j k l m n o p q r s <br /><br />Moves: Y vs O<br /><br />1. s4d4/b4 <br />1... a7d7/g4 d19g16/g7 l19l16/i19<br />2. a8a5/b5 d1d2/d1 d4d3/d4 h19c14/c4<br />2... h1g2/e2 d7e6/e3 l16l11/e4 a12b11/b6<br />3. a5a9/e5 d3a3/a7 d2e1/g3 p19p2/h2     <br />3... g2j5/f1 e6f7/f2 b11f11/a6 g16e16/e14<br />4. a16d16/d17 c14d13/d15 a9d9/d8 s12e12/e11  <br /></code>
+
+</body>
+</html>

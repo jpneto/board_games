@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Y using the Lovely mutator</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Y using the Lovely mutator</h2>
+  <b>Date:</b> 2006-03-28 15:15 | <b>Tags:</b> mutators, new games
+  <hr>
+
+LOVELY modifier: along with one's own stone one must play an opponent<br />===============&nbsp;&nbsp;stone as (euclidean) close as possible to one's own<br /><br /><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ooo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xxx<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------------<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.&nbsp;&nbsp;k7,j6&nbsp;&nbsp;&nbsp;&nbsp;l6,k5<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;n8,o9&nbsp;&nbsp;&nbsp;&nbsp;i7,h6<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.&nbsp;&nbsp;j10,i11&nbsp;&nbsp;g7,f6<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;&nbsp;g9,f10&nbsp;&nbsp; h10,g11<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. . o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.&nbsp;&nbsp;m9,n10&nbsp;&nbsp; m11,o11<br />&nbsp;&nbsp;&nbsp;&nbsp; o o x x . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.&nbsp;&nbsp;k11,l10&nbsp;&nbsp;k9,l8<br />&nbsp;&nbsp;&nbsp;&nbsp;. x x o . . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7.&nbsp;&nbsp;resign<br />&nbsp;&nbsp; . . . . o o . .&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.<br />&nbsp;&nbsp;. . o . x o x . .&nbsp;&nbsp;&nbsp;&nbsp; 9.<br />&nbsp;. . x x o x x . . .&nbsp;&nbsp; 10.<br />. . . o x o x o . . .&nbsp;&nbsp;11.<br />abcdefghijklmnopqrstu</code><br /><br />This mutator is based on Vincent Everaert's <a href="http://www.zillions-of-games.com/cgi-bin/zilligames/submissions.cgi/59289?do=show;id=1161">In Love Gomoku</a>. One problem, imho, with In-Love mutator is that it permits tabu cells, ie, isolated cells where it's not legal to drop pieces. This tabu cells can produce much more drawish games (which seems the case with Gomoku). Using a closer cell to place the enemy stone, tabu cells are eliminated while still allowing all the tactical possibilities of the original mutator.
+
+</body>
+</html>

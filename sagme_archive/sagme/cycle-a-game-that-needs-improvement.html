@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>Cycle: a game that needs improvement</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>Cycle: a game that needs improvement</h2>
+  <b>Date:</b> 2007-03-16 09:00 | <b>Tags:</b> puzzles, new games
+  <hr>
+
+[<span style="font-style:italic;">This is a bit of a challenge. The original rules follows but they do not provide a good dynamics, the game needs, if possible, improvement</span>]<br /><br />Played on a square board with orthogonal bridge connections.<br /><br />On each turn, each player may:<br /><br />1) Pass, or<br />2) Drop a friendly stone on an empty cell, or<br />3) Connect two orthogonally adjacent friendly colors with a bridge, or<br />4) Capture a stone in custodian capture (both friendly stones must have<br />  been played in previous turns, so it takes a turn just to capture)<br />  * A corner stone may be captured if both adjacent cells are occupied<br />    by enemy stones<br />  * KO rule - not the same board position in two consecutive turns.<br /><br />After two consecutive passes, wins the player with the largest cycle<br />concerning friendly bridges.<br /><br />Egs:<br /><br />White has a cycle of size 4 (the smallest possible)<br />while black as a maximum cycle of size 12<br /><code>.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;o--o&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;|<br />.&nbsp;&nbsp;.&nbsp;&nbsp;o--o&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;x&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;x--x--x&nbsp;&nbsp;.<br />&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;|&nbsp;&nbsp;|<br />.&nbsp;&nbsp;x--x--x--x&nbsp;&nbsp;x--x&nbsp;&nbsp;.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br />.&nbsp;&nbsp;.&nbsp;&nbsp;x--x--x--x&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /></code><br />Capture, since it wastes a move, may not be executed<br />at once, leaving a lot of potential threats in the board<br /><br />Should White capture the black stone or just continue to extend<br />his groups? If Black plays at d2 it forces the capture at d4<br />and gains one tempo sacrificing one stone (it should then play d1)<br /><code>.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;x&nbsp;&nbsp;x&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;o--o&nbsp;&nbsp;x&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;x&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;o&nbsp;&nbsp;o&nbsp;&nbsp;x&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /><br />.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.<br /></code><br />I'm not sure if it's easy to make larger cycles, so probably the game score<br />could be the sum of all the max cycles on each group (probably the sum <br />of the squares of all max cycle sizes - in order to players to take risks in<br />achieving larger cycles)<br /><br />The game does not provide tactical richness and thus is dull. If you can work out a better variant, please send your proposal.
+
+</body>
+</html>

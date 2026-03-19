@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="João Pedro Neto">
+  <title>A multiplication game</title>
+</head>
+
+<body background="../back-wood3.jpg">
+  
+  <h2>A multiplication game</h2>
+  <b>Date:</b> 2007-05-02 08:23 | <b>Tags:</b> new games
+  <hr>
+
+This game is focused for young people when learning multiplication.<br />Let's consider multiplications x*y with values ranging from 1 to 9.<br /><br />First, one player picks one pair, say x1*y1. The second player chooses another pair x2*y2. Then the second player takes the modulus of the difference , i.e., |x1*y1 - x2*y2| and takes that difference as his points. Then, the second player must choose a pair x2*y3 or x3*y2 (i.e., he must keep one of the numbers from his last picked pair). This is the first turn. Then this is repeated (now the first player starts choosing a pair, makes the difference and choose a related pair, and so on...). Pairs can never be choosed twice.<br /><br />The game ends when one player cannot continue (there are no similar pairs to choose since all were selected already). The player with less points wins the game.<br /><br />It's possible to speed things up but restricting to pairs x*y where x&lt;y.<br /><br />An initial example:<br /><code><br />____ Player1 ____________ Player2 ____<br />--- (--------) 3x5 | 4x4 (1 points) 4x9 --> |3x5-4x4|=1<br />6x6 (0 points) 6x9 | 7x8 (2 points) 7x9<br />8x8 (1 points) 8x9 | 9x9 (9 points) 5x9<br />6x7 (3 points) 6x8 | 7x7 (1 points) 5x7<br />4x8 (3 points) 5x8   (and so on...)<br /></code>
+
+</body>
+</html>
